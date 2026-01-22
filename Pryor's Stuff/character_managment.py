@@ -1,5 +1,14 @@
 # CB 1st Character Manager Pseudocode
+# characters = ({"Name":"Example","Class":"Example","Level":1,"Stats":{"Stat1":Example Num},"Skills":{"Skill_name":"Skill_desc"},"Inventory":{"Item_name":"Item_desc"}})
+
+# skills_list = []
+
+# classes_list = []
+
 # define function create_character():
+    # new_character = {}
+    # stats_dictionary = {"Strength":10,"Dexterity":10,"Consititution":10,"Wisdom":10,"Intelligence":10,"Charisma":10} (Note: These are just placeholders)
+    # skills_dictionary = {}
     # while True:
         # ask user for character name
         # save character name in a variable
@@ -7,6 +16,7 @@
         # have user set level
         # ask user if these choices are okay, display name choice and race choice
         # if yes:
+            # append character name and level to new_character dictionary
             # apply race based attribute bonuses to attributes dictionary
             # break
         # if no:
@@ -19,6 +29,7 @@
             # display attributes
             # ask if these are okay
             # if yes:
+                # Set stats_dictionary attributes
                 # break
             # if no:
                 # reset attributes
@@ -31,7 +42,7 @@
         # if no:
             # continue
     # while True:
-        # ask user to choose skills (combat, support, misc)
+        # ask user to choose skills (combat, support, misc) avaiable skills are based off of attributes
         # once user has chosen as many skills as their level is, ask if these choices are okay
         # if yes:
             # break
@@ -52,7 +63,7 @@
 # define function manage_inspect():
     # while True:
         # display Name, Race, Level, and Class of inspected character
-        # ask user if they want to change anything
+        # ask user if they want to change character name or level
         # if Name:
             # have user enter new name for character
             # ask user if they want to continue changing stuff
@@ -60,5 +71,18 @@
                 # continue
             # if no:
                 # return to character inspect menu
-        # if Race:
-            # have user choose new Race for character
+        # if Level:
+            # have user set new level that is higher then current level
+            # if new level <= current level:
+                # tell user to set a different level
+            # else:
+                # per new level:
+                    # ask user if they would like to get a stat boost or a new skill:
+                    # if stat boost:
+                        # have user choose a stat to add one to
+                        # if stat is equal to 20:
+                            # have user choose a different stat
+                        # else:
+                            # add one to that skill
+                    # if new skill:
+                        # have user choose a new skill that they don't have
