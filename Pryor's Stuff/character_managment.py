@@ -1,5 +1,5 @@
 # CB 1st Character Manager Pseudocode
-# characters = ({"Name":"Example","Class":"Example","Level":1,"Stats":{"Stat1":Example Num},"Skills":{"Skill_name":"Skill_desc"},"Inventory":{"Item_name":"Item_desc"}})
+# characters = ({"Name":"Example", "Class":"Example", "Level":1, "Stats":{"Stat1":Example Num}, "Skills":{"Skill_name":"Skill_desc"}, "Inventory":{"Item_name":"Item_desc"}})
 
 # skills_list = []
 
@@ -55,7 +55,11 @@
         # ask user if they want a stat boost or a new skill
         # if stat:
             # have user choose a stat to add 1 to
-            # break
+            # if that stat would go over 20:
+                # have user choose a different stat
+            #else:
+
+                # break
         # if skill:
             # have user choose a skill to gain that they don't already have
             # break
@@ -77,12 +81,4 @@
                 # tell user to set a different level
             # else:
                 # per new level:
-                    # ask user if they would like to get a stat boost or a new skill:
-                    # if stat boost:
-                        # have user choose a stat to add one to
-                        # if stat is equal to 20:
-                            # have user choose a different stat
-                        # else:
-                            # add one to that skill
-                    # if new skill:
-                        # have user choose a new skill that they don't have
+                    # run level_up() function
