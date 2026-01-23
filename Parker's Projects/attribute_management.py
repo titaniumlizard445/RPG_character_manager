@@ -13,3 +13,4 @@
       #if no
         #go to next attribute (aka continue)
     #display that it is done with the attribute changer
+  #return character dictionary
