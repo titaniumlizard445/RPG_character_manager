@@ -38,8 +38,9 @@
         #ask if user is done with the inventory changer
             #if yes
                 #leave
+    #return character dictionary
 
-#function for character inspection (characters list with all associated values,specific character that is being inspected)
+#function for character inspection (characters dictionary)
     #Display list of characters
     #Input for which character they want to inspect
     #Display options for what part of the character they would like to inspect (Class, Level, Inventory, Attributes, skills, Leave ,or Help Button)
@@ -56,4 +57,4 @@
         #exit this function
     #if they ask for help
         #display a brief help guide
-    
+    #return character dictionary
