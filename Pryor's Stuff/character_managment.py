@@ -7,7 +7,7 @@
 
 # define function create_character():
     # new_character = {}
-    # stats_dictionary = {"Strength":10,"Dexterity":10,"Consititution":10,"Wisdom":10,"Intelligence":10,"Charisma":10} (Note: These are just placeholders)
+    # stats_dictionary = {"Strength":10,"Dexterity":10,"Constitution":10,"Wisdom":10,"Intelligence":10,"Charisma":10} (Note: These are just placeholders)
     # skills_dictionary = {}
     # while True:
         # ask user for character name
@@ -35,14 +35,14 @@
                 # reset attributes
                 # continue
     # while True:
-        # ask user to choose class (display list of avaiable classes based off of attributes)
+        # ask user to choose class (display list of available classes based off of attributes)
         # ask user if this choice is okay (display class choice)
         # if yes:
             # break
         # if no:
             # continue
     # while True:
-        # ask user to choose skills (combat, support, misc) avaiable skills are based off of attributes
+        # ask user to choose skills (combat, support, misc) available skills are based off of attributes
         # once user has chosen as many skills as their level is, ask if these choices are okay
         # if yes:
             # break
