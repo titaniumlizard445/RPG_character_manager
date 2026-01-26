@@ -50,7 +50,7 @@
 #           output(your level is your overall power and at higher levels you can get new stuff such as items new abilities or other things)
 #       else if1:
 #           output(your class is like your job, it also sets what you have access to)
-#the stupid profed input 
+#the stupid proofed input 
 def check_each_char(word,type_checking):
     for x in word:
         if type_checking==int:
