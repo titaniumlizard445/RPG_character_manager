@@ -12,7 +12,7 @@
     # while True:
         # ask user for character name
         # save character name in a variable
-        # have user choose race (human, elf, dwarf, gnome)
+        # have user choose race (human, elf, dwarf, gnome,dragonborn,halfling)
         # have user set level
         # ask user if these choices are okay, display name choice and race choice
         # if yes:
@@ -82,3 +82,86 @@
             # else:
                 # per new level:
                     # run level_up() function
+
+
+characters = ({"Name":"Example",
+               "Race":"Example", 
+               "Class":"Example", 
+               "Level":1, 
+               "Stats":{"Stat1":"Example Num"}, 
+               "Skills":{"Skill_name":"Skill_desc"}, 
+               "Inventory":{"Item_name":"Item_desc"},})
+
+skills_list = []
+classes_list = []
+items_list = []
+species_list = ["Human (+2 to Consitution)","Elf (+2 to Wisdom)","Dwarf (+2 to Strength)","Gnome (+2 to Intelligence)","Dragonborn (+2 to Dexterity)","Halfling (+2 to Charisma)"]
+stats_list = ["Strength","Dexterity","Constitution","Wisdom","Intelligence","Charisma"]
+
+def create_character(skills_list,classes_list,items_list,species_list):
+    new_character = {}
+    new_stats = {"Strength":0,"Dexterity":0,"Consititution":0,"Wisdom":0,"Intelligence":0,"Charisma":0}
+    new_skills = []
+    while True:
+        name = input("What will the name of your character be?").strip()
+        check = input(f"Are you sure you want {name} to be your character's name? It cannot be changed later. Y/N").strip().capitalize()
+        if check == "Y":
+            new_character["Name"] = name
+            break
+        else:
+            continue
+
+    while True:
+        print("Available Races")
+        count = 0
+        for i in species_list:
+            count += 1
+            print(f"{count}. {i}")
+        race = input("What will the race of your character be?").strip().capitalize()
+        if race not in species_list:
+            print("Invalid answer")
+        else:
+            check = input(f"Are you sure you want {name} to be a {race}? It cannot be changed later. Y/N").strip().capitalize()
+            if check == "Y":
+                new_character["Race"] = race
+                match race:
+                    case "Human":
+                        new_stats["Consititution"] += 2
+                    case "Elf":
+                        new_stats["Wisdom"] += 2
+                    case "Dwarf":
+                        new_stats["Strength"] += 2
+                    case "Gnome":
+                        new_stats["Intelligence"] += 2
+                    case "Dragonborn":
+                        new_stats["Dexterity"] += 2
+                    case "Halfling":
+                        new_stats["Charisma"] += 2
+                break
+            else:
+                continue
+    while True:
+        for i in stats_list:
+            while True:
+                stat = input(f"What do you want your base stat for {i} to be?")
+                if stat.isnumeric() == False:
+                    print("Invalid answer")
+                    continue
+                else:
+                    stat = int(stat)
+                    final_stat = new_stats[i] + stat
+                    if final_stat > 20:
+                        print("That would make the stat go over 20. Please enter a lower number.")
+                        continue
+                    else:
+                        check = input(f"{i}: {final_stat}. Are you sure this is what you want? Y/N").strip().capitalize()
+                        if check == "Y":
+                            new_stats[i] = final_stat
+                            break
+                        else:
+                            continue
+        break
+    while True:
+        available_classes = []
+        
+                        
