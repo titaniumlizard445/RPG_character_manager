@@ -21,7 +21,7 @@
                     #have user input the value
                     #have user input a description
                     #have user input attributes
-                    #store all the of the inforamtion in the dictionary
+                    #store all the of the information in the dictionary
                     #add that to the player's inventory
                 #if remove was chosen
                     #ask for the name of the item to remove or put leave if they don't want to input anything
