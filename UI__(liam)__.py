@@ -51,11 +51,27 @@
 #       else if1:
 #           output(your class is like your job, it also sets what you have access to)
 #the stupid profed input 
+def check_each_char(word,type_checking):
+    for x in word:
+        if type_checking==int:
+            if x in ["1","2","3","4","5","6","7","8","9","0"]:
+                continue
+            else:
+                return False
+        if type_checking==float:
+            if x in ["1","2","3","4","5","6","7","8","9","0","."]:
+                continue
+            else:
+                return False
+        else:
+            return True
+    return True
 def stupid_input(type_return,prompt="input thy info: ",invalid_prompt="invalid input"):
     while True:
-        try:
-            return type_return(input(prompt))
-        except:
+        user_input=input(prompt)
+        if check_each_char(user_input,type_return):
+            return type_return(user_input)
+        else:
             print(invalid_prompt)
 def serch_and_compare(char_dict,stats):
     while True:
@@ -67,23 +83,23 @@ def serch_and_compare(char_dict,stats):
         print(char_dict)
         #get the characters that you want to compare and the stat
         while True:
-            try:   
-                char1=char_dict[stupid_input(str,"what is the name of the first character that you want to compare: ")]
+            if user_input:= stupid_input(str,"what is the name of the first character that you want to compare: ")in char_dict:
+                char1=char_dict[user_input]
                 break
-            except:
+            else:
                 print("there is no character with that name")
-        while True:
-            try:   
-                char2=char_dict[stupid_input(str,"what is the name of the second character that you want to compare: ")]
+        while True:  
+            if user_input:= stupid_input(str,"what is the name of the second character that you want to compare: ")in char_dict:
+                char2=char_dict[user_input]
                 break
-            except:
+            else:
                 print("there is no character with that name")
         print(stats)
         while True:
-            try:   
-                stat=stats[stupid_input(str,"what is the name of the stat that you want to compare from both characters stats: ")]
+            if user_input:= stupid_input(str,"what is the name of the stat that you want to compare from both characters stats: ") in char_dict:   
+                stat=stats[user_input]
                 break
-            except:
+            else:
                 print("there is no stat with that name")
         print(f"character name|{stat}\n{char1["name"]}:{char1[stat]}\n{char2["name"]}:{char2[stat]}")
 # if the user is confused this function will help
