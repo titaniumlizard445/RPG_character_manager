@@ -66,42 +66,42 @@ def check_each_char(word,type_checking):
         else:
             return True
     return True
-def stupid_input(type_return,prompt="input thy info: ",invalid_prompt="invalid input"):
+def stupid_input(type_return,prompt="Input thy info: ",invalid_prompt="Invalid input"):
     while True:
         user_input=input(prompt)
         if check_each_char(user_input,type_return):
             return type_return(user_input)
         else:
             print(invalid_prompt)
-def serch_and_compare(char_dict,stats):
+def search_and_compare(char_dict,stats):
     while True:
         #makes sure the user wants to use
-        if stupid_input(str,"do you want to use (y/n): ")=="n"or len(char_dict)<2:
+        if stupid_input(str,"Do you want to use (y/n): ")=="n"or len(char_dict)<2:
             if len(char_dict)<2:
-                print("you dont have enough characters to compare")
+                print("You dont have enough characters to compare.")
             return
         print(char_dict)
         #get the characters that you want to compare and the stat
         while True:
-            if user_input:= stupid_input(str,"what is the name of the first character that you want to compare: ")in char_dict:
+            if user_input:= stupid_input(str,"What is the name of the first character that you want to compare: ")in char_dict:
                 char1=char_dict[user_input]
                 break
             else:
-                print("there is no character with that name")
+                print("There is no character with that name.")
         while True:  
-            if user_input:= stupid_input(str,"what is the name of the second character that you want to compare: ")in char_dict:
+            if user_input:= stupid_input(str,"What is the name of the second character that you want to compare: ")in char_dict:
                 char2=char_dict[user_input]
                 break
             else:
-                print("there is no character with that name")
+                print("There is no character with that name.")
         print(stats)
         while True:
-            if user_input:= stupid_input(str,"what is the name of the stat that you want to compare from both characters stats: ") in char_dict:   
+            if user_input:= stupid_input(str,"What is the name of the stat that you want to compare from both characters stats: ") in char_dict:   
                 stat=stats[user_input]
                 break
             else:
-                print("there is no stat with that name")
-        print(f"character name|{stat}\n{char1["name"]}:{char1[stat]}\n{char2["name"]}:{char2[stat]}")
+                print("There is no stat with that name.")
+        print(f"Character Name|{stat}\n{char1["name"]}:{char1[stat]}\n{char2["name"]}:{char2[stat]}")
 # if the user is confused this function will help
 def user_help():
     while True:
@@ -109,17 +109,17 @@ def user_help():
         if help_with==6:
             return
         elif help_with==5:
-            print("skills are bonuses to abilities or new abilities")
+            print("Skills are bonuses to abilities or new abilities.")
         elif help_with==4:
-            print("attributes are your base stats such as strength or chiasma")
+            print("Attributes are your base stats such as strength or chiasma.")
         elif help_with==3:
-            print("your inventory is what items you have")
+            print("Your inventory is what items you have.")
         elif help_with==2:
-            print("your level is your overall power and at higher levels you can get new stuff such as items new abilities or other things")
+            print("Your level is your overall power and at higher levels you can get new stuff such as items new abilities or other things.")
         elif help_with==1:
-            print("your class is like your job, it also sets what you have access to")
+            print("Your class is like your job, it also sets what you have access to.")
         else:
-            print("that is not an option")
+            print("That is not an option.")
 #this is to debug
 if __name__=="__main__":
     test_char_dict={}
@@ -151,8 +151,9 @@ if __name__=="__main__":
     while True:
         choice=stupid_input(int,"1 to test search and compare 2 to test user help 3 to quit: ")
         if choice==1:
-            serch_and_compare(test_char_dict,test_stats)
+            search_and_compare(test_char_dict,test_stats)
         if choice==2:
             user_help()
         if choice==3:
             quit()
+#yes I am a Metroid fan
