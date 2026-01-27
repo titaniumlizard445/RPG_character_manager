@@ -1,15 +1,28 @@
 #Isaac Covington CP2 Skill Management
 
 #import level up
-
-
-#y
+import random
 #def skill requirements:
+def skill_requirements():
     #wizard skills = {Magic Missile, Fireball}
+    wizard_skills = {
+        'magic missile' : {'projectiles':3,
+                        'damage': '1d4' +1,
+                        'class requirements' : 'Wizard'
+        },
+        'fireball' : {'damage': '8d6',
+                      'class requirements' : 'wizard',
+        }
+    }
     #magic missile = requirements, damage, and roll
     #fireball = requirements, damage, roll
 
     #fighter skills = {Extra strike, Heavy Strike}
+    fighter_skills = {
+        'extra strike' : {'damage' : 'whatever weapon in use',
+                          'class requirements' : 'fighter'
+        }
+    }
     #extra strike = requirements, damage, roll
     #etc for every other skill :)
 
