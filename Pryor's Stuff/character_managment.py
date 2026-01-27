@@ -96,12 +96,12 @@ skills_list = []
 classes_list = []
 items_list = []
 species_list = ["Human (+2 to Consitution)","Elf (+2 to Wisdom)","Dwarf (+2 to Strength)","Gnome (+2 to Intelligence)","Dragonborn (+2 to Dexterity)","Halfling (+2 to Charisma)"]
+actual_species_list = ["Human","Elf","Dwarf","Gnome","Dragonborn","Halfling"]
 stats_list = ["Strength","Dexterity","Constitution","Wisdom","Intelligence","Charisma"]
 
-def create_character(skills_list,classes_list,items_list,species_list):
+def create_character_stepone(species_list):
     new_character = {}
-    new_stats = {"Strength":0,"Dexterity":0,"Consititution":0,"Wisdom":0,"Intelligence":0,"Charisma":0}
-    new_skills = []
+    new_stats = {"Strength":0,"Dexterity":0,"Constitution":0,"Wisdom":0,"Intelligence":0,"Charisma":0}
     while True:
         name = input("What will the name of your character be?").strip()
         check = input(f"Are you sure you want {name} to be your character's name? It cannot be changed later. Y/N").strip().capitalize()
@@ -118,7 +118,7 @@ def create_character(skills_list,classes_list,items_list,species_list):
             count += 1
             print(f"{count}. {i}")
         race = input("What will the race of your character be?").strip().capitalize()
-        if race not in species_list:
+        if race not in actual_species_list:
             print("Invalid answer")
         else:
             check = input(f"Are you sure you want {name} to be a {race}? It cannot be changed later. Y/N").strip().capitalize()
@@ -126,7 +126,7 @@ def create_character(skills_list,classes_list,items_list,species_list):
                 new_character["Race"] = race
                 match race:
                     case "Human":
-                        new_stats["Consititution"] += 2
+                        new_stats["Constitution"] += 2
                     case "Elf":
                         new_stats["Wisdom"] += 2
                     case "Dwarf":
@@ -160,8 +160,38 @@ def create_character(skills_list,classes_list,items_list,species_list):
                             break
                         else:
                             continue
+        new_character["Stats"] = new_stats
         break
+    available_classes = []
+    if new_stats["Charisma"] >= 13:
+        available_classes.append("Bard")
+    if new_stats["Constitution"] >= 13:
+        available_classes.append("Barbarian")        
+    if new_stats["Dexterity"] >= 13:
+        available_classes.append("Rouge")
+    if new_stats["Wisdom"] >= 13:
+        available_classes.append("Wizard")
+    if new_stats["Strength"] >= 13:
+        available_classes.apppend("Fighter")
+    if new_stats["Intelligence"] >= 13:
+        available_classes.append("Sorcerer")   
+    print("Available Classes:")
+    for i in available_classes:
+        print(i)
     while True:
-        available_classes = []
-        
-                        
+        class_choice = input("What class do you want to take?").strip().capitalize()
+        if class_choice not in available_classes:
+            print("Invalid answer")
+        else:
+            check = input(f"Are you sure you want to take {class_choice} as your class? Y/N").strip().capitalize()
+            if check == "Y":
+                new_character["Class"] = class_choice
+                break
+            else:
+                continue
+    
+    print(new_character)
+    
+create_character_stepone(species_list)
+    
+
