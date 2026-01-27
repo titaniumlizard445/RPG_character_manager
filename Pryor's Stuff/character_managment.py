@@ -104,7 +104,7 @@ def create_character_stepone(species_list):
     new_stats = {"Strength":0,"Dexterity":0,"Constitution":0,"Wisdom":0,"Intelligence":0,"Charisma":0}
     while True:
         name = input("What will the name of your character be?").strip()
-        check = input(f"Are you sure you want {name} to be your character's name? It cannot be changed later. Y/N").strip().capitalize()
+        check = input(f"Are you sure you want {name} to be your character's name? Y/N").strip().capitalize()
         if check == "Y":
             new_character["Name"] = name
             break
@@ -123,6 +123,7 @@ def create_character_stepone(species_list):
         else:
             check = input(f"Are you sure you want {name} to be a {race}? It cannot be changed later. Y/N").strip().capitalize()
             if check == "Y":
+                race = tuple(race)
                 new_character["Race"] = race
                 match race:
                     case "Human":
