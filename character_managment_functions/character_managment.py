@@ -84,13 +84,13 @@
                     # run level_up() function
 
 
-characters = set({"Name":"Example",
-               "Race":"Example", 
+characters = {"Name":{
+                "Race":"Example", 
                "Class":"Example", 
                "Level":1, 
                "Stats":{"Stat1":"Example Num"}, 
                "Skills":{"Skill_name":"Skill_desc"}, 
-               "Inventory":{"Item_name":"Item_desc"},})
+               "Inventory":{"Item_name":"Item_desc"},}}
 
 species_list = ["Human (+2 to Consitution)","Elf (+2 to Wisdom)","Dwarf (+2 to Strength)","Gnome (+2 to Intelligence)","Dragonborn (+2 to Dexterity)","Halfling (+2 to Charisma)"]
 actual_species_list = ["Human","Elf","Dwarf","Gnome","Dragonborn","Halfling"]
@@ -190,6 +190,9 @@ def create_character_stepone(species_list):
     
     print(new_character)
     
-create_character_stepone(species_list)
-    
+def manage_inspect(characters,character_name):
+    while True:
+        print(f"Name: {character_name}\nClass: {characters(character_name["Class"])}\nRace: {characters(character_name["Race"])}\nLevel: {characters(character_name["Level"])}")
+        break
 
+manage_inspect(characters,"Name")
