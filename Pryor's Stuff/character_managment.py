@@ -84,7 +84,7 @@
                     # run level_up() function
 
 
-characters = ({"Name":"Example",
+characters = set({"Name":"Example",
                "Race":"Example", 
                "Class":"Example", 
                "Level":1, 
