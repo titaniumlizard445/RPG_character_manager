@@ -92,9 +92,6 @@ characters = ({"Name":"Example",
                "Skills":{"Skill_name":"Skill_desc"}, 
                "Inventory":{"Item_name":"Item_desc"},})
 
-skills_list = []
-classes_list = []
-items_list = []
 species_list = ["Human (+2 to Consitution)","Elf (+2 to Wisdom)","Dwarf (+2 to Strength)","Gnome (+2 to Intelligence)","Dragonborn (+2 to Dexterity)","Halfling (+2 to Charisma)"]
 actual_species_list = ["Human","Elf","Dwarf","Gnome","Dragonborn","Halfling"]
 stats_list = ["Strength","Dexterity","Constitution","Wisdom","Intelligence","Charisma"]
