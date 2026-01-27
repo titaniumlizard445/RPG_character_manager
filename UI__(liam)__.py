@@ -52,6 +52,7 @@
 #           output(your class is like your job, it also sets what you have access to)
 #the stupid proofed input 
 import main
+import character_managment_functions.character_managment
 
 def check_each_char(word,type_checking):
     for x in word:
