@@ -51,6 +51,8 @@
 #       else if1:
 #           output(your class is like your job, it also sets what you have access to)
 #the stupid proofed input 
+import main
+
 def check_each_char(word,type_checking):
     for x in word:
         if type_checking==int:
@@ -76,6 +78,7 @@ def stupid_input(type_return,prompt="Input thy info: ",invalid_prompt="Invalid i
 def search_and_compare(char_dict,stats):
     while True:
         #makes sure the user wants to use
+        # Pryor: They got here using a menu, this is redundant.
         if stupid_input(str,"Do you want to use (y/n): ")=="n"or len(char_dict)<2:
             if len(char_dict)<2:
                 print("You dont have enough characters to compare.")
@@ -83,6 +86,17 @@ def search_and_compare(char_dict,stats):
         print(char_dict)
         #get the characters that you want to compare and the stat
         while True:
+            # Pryor: The characters will be saved as a set of dictionaries.
+            # Pryor: Example Character
+            # characters = set({"Name":"Example",
+            #  "Race":"Example", 
+            # "Class":"Example", 
+            #"Level":1, 
+            # "Stats":{"Stat1":"Example Num"}, 
+            # "Skills":{"Skill_name":"Skill_desc"}, 
+            # "Inventory":{"Item_name":"Item_desc"},})
+
+            # Pryor: We might want to let the user choose how to search for the characters, such as by Name, Race, or Class.
             if user_input:= stupid_input(str,"What is the name of the first character that you want to compare: ")in char_dict:
                 char1=char_dict[user_input]
                 break
@@ -94,18 +108,24 @@ def search_and_compare(char_dict,stats):
                 break
             else:
                 print("There is no character with that name.")
+        # Pryor: What is stats?
         print(stats)
         while True:
+            # Pryor: We're not just comparing the stats of the characters. We want to compare Class, Level, Race, and Stats.
             if user_input:= stupid_input(str,"What is the name of the stat that you want to compare from both characters stats: ") in char_dict:   
+                # Pryor: There isn't a seperate stats dictionary.
                 stat=stats[user_input]
                 break
             else:
                 print("There is no stat with that name.")
+                # Pryor: This is written like each character has its own seperate dictionary.
         print(f"Character Name|{stat}\n{char1["name"]}:{char1[stat]}\n{char2["name"]}:{char2[stat]}")
 # if the user is confused this function will help
+# Pryor: I don't think we're gonna be having a help function
 def user_help():
     while True:
         help_with=stupid_input(int,"1 for help with classes\n2 for help with level\n3 for help with inventory\n4 for help with attributes\n5 for help with skills\n6 to go back\nwhat do you want: ","that is not an option")
+        # Pryor: You should be using match-case here.
         if help_with==6:
             return
         elif help_with==5:
@@ -117,9 +137,28 @@ def user_help():
         elif help_with==2:
             print("Your level is your overall power and at higher levels you can get new stuff such as items new abilities or other things.")
         elif help_with==1:
-            print("Your class is like your job, it also sets what you have access to.")
+            print("Your class is like your job, it also sets what skills you have access to.")
         else:
             print("That is not an option.")
+def main_menu():
+    while True:
+        choice=stupid_input(int,"1 to inspect character\n2 to create new character\n3 to search and compare characters\n0 to quit")
+        if choice==1:
+            pass
+        if choice==2:
+            pass
+        if choice==3:
+            search_and_compare()
+        if choice==0:
+            return
+
+
+
+
+
+
+
+
 #this is to debug
 if __name__=="__main__":
     test_char_dict={}
@@ -149,11 +188,14 @@ if __name__=="__main__":
                           __/ |         __/ |
                          |___/         |___/           """)
     while True:
-        choice=stupid_input(int,"1 to test search and compare 2 to test user help 3 to quit: ")
+        choice=stupid_input(int,"1 to test search and compare 2 to test user help 3 for main menu 0 to quit: ")
         if choice==1:
             search_and_compare(test_char_dict,test_stats)
         if choice==2:
             user_help()
         if choice==3:
+            main_menu()
+        if choice==0:
             quit()
 #yes I am a Metroid fan
+# Pryor: This ascii art just clutters your code.
