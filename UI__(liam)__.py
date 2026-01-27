@@ -198,3 +198,4 @@ if __name__=="__main__":
         if choice==0:
             quit()
 #yes I am a Metroid fan
+# Pryor: This ascii art just clutters your code.
