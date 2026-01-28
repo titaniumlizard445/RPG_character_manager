@@ -4,7 +4,7 @@
 
 #import attribute manager
 from attribute_management import attribute_manager
-
+from UI_liam import user_help
 #function for inventory changer (character chosen, character dictionary)
 def inventory_changer(character,char_dict):
     #loop until user is done with inventory management
@@ -131,6 +131,6 @@ def inspection_de_character(char_dictionary):
             #if they ask for help
             case "6":
                 #display a brief help guide
-                print("Class and level have things")
+                user_help()
     #return character dictionary
     return char_dictionary
