@@ -54,6 +54,7 @@
 import main
 import character_managment_functions.character_managment
 
+
 def check_each_char(word,type_checking):
     for x in word:
         if type_checking==int:
