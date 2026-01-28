@@ -54,7 +54,6 @@
 import main
 import character_managment_functions.character_managment
 
-
 def check_each_char(word,type_checking):
     for x in word:
         if type_checking==int:
@@ -79,7 +78,7 @@ def stupid_input(type_return,prompt="Input thy info: ",invalid_prompt="Invalid i
             print(invalid_prompt)
 def search_and_compare(char_dict,stats):
     while True:
-        #makes sure the user wants to use
+        # Liam: Makes sure the user wants to use.
         # Pryor: They got here using a menu, this is redundant.
         if stupid_input(str,"Do you want to use (y/n): ")=="n"or len(char_dict)<2:
             if len(char_dict)<2:
@@ -87,7 +86,7 @@ def search_and_compare(char_dict,stats):
             return
         for char,names_for_char in char_dict.items():
             print(f"{char}:{names_for_char}")
-        #get the characters that you want to compare and the stat
+        # Liam: Get the characters that you want to compare and the stat.
         while True:
             # Pryor: The characters will be saved as a set of dictionaries.
             # Pryor: Example Character
@@ -124,8 +123,8 @@ def search_and_compare(char_dict,stats):
                 print("There is no stat with that name.")
                 # Pryor: This is written like each character has its own seperate dictionary.
         print(f"Character Name|{stat}\n{char1["name"]}:{char1[stat]}\n{char2["name"]}:{char2[stat]}")
-# if the user is confused this function will help
-# Pryor: I don't think we're gonna be having a help function
+# If the user is confused this function will help.
+# Pryor: I don't think we're gonna be having a help function.
 def user_help():
     while True:
         help_with=stupid_input(int,"1 for help with classes\n2 for help with level\n3 for help with inventory\n4 for help with attributes\n5 for help with skills\n6 to go back\nwhat do you want: ","that is not an option")
@@ -150,7 +149,7 @@ def main_menu():
         if choice==1:
             pass
         if choice==2:
-            passm
+            pass
         if choice==3:
             search_and_compare()
         if choice==0:
@@ -163,7 +162,7 @@ def main_menu():
 
 
 
-#this is to debug
+# Liam: This is to debug.
 if __name__=="__main__":
     test_char_dict={}
     test_stats={}
@@ -201,5 +200,6 @@ if __name__=="__main__":
             main_menu()
         if choice==0:
             quit()
-#yes I am a Metroid fan
+# Liam: Yes I am a Metroid fan.
 # Pryor: This ascii art just clutters your code.
+# Liam: Tt's an artistic choice, programming is a form of art.
