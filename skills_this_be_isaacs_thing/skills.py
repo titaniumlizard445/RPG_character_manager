@@ -11,21 +11,20 @@ def skill_requirements():
                         'class requirements' : 'Wizard'
         },
         'fireball' : {'damage': '8d6',
-                      'class requirements' : 'wizard',
+                    'class requirements' : 'wizard',
         }
-    }
+    },
     #magic missile = requirements, damage, and roll
     #fireball = requirements, damage, roll
 
     #fighter skills = {Extra strike, Heavy Strike}
     fighter_skills = {
         'extra strike' : {'damage' : 'whatever weapon in use',
-                          'class requirements' : 'fighter'
-        }
+                        'class requirements' : 'fighter'
+        },
     }
     #extra strike = requirements, damage, roll
     #etc for every other skill :)
-
     #bard skills = {Inspire, Theme Song}
     #rogue skills = {Sneak, Assassinate}
     #strength skills = {boulder lift, Hercules}
@@ -45,7 +44,25 @@ def skill_requirements():
     #check by using skill requirements
     #add stat that is picked to user stats.
     #attributes altered to accommodate for user skills.
+rogue_skills = []
+wizard_skills = []
+bard_skills = []
+fighter_skills = []
 
-    
+skills_list = [level_one = [rogue_skills = [], wizard_skills = [], bard_skills = [], fighter_skills = []]]
+def skills_available(skills_list,characters,character_name, level,):
+    available_skills = []
+    if characters[character_name][level] < 10:
+        match characters[character_name]['Class']:
+            case 'Fighter':
+                available_skills.append(skills_list[level_10_below[fighter_skills]])
+            case 'Bard':
+                available_skills.append(skills_list[level_10_below[bard_skills]])
+            case 'Wizard':
+                available_skills.append(skills_list[level_10_below[wizard_skills]])
+            case 'Rogue':
+                available_skills.append(skills_list[level_10_below[rogue_skills]])
+    return available_skills
 
-
+def skill_choice():
+    chosen_skill = input(f"Which skill do you want? Type the name of your chosen skill.{available_skills}")
