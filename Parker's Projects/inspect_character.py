@@ -2,6 +2,9 @@
 
 #import from pryors stuff
 
+#import attribute manager
+from attribute_management import attribute_manager
+
 #function for inventory changer (character chosen, character dictionary)
 def inventory_changer(character,char_dict):
     #loop until user is done with inventory management
@@ -86,22 +89,48 @@ def inventory_changer(character,char_dict):
             break
                 #leave
     #return character dictionary
+    return char_dict
 
 #function for character inspection (characters dictionary)
-    #Display list of characters
-    #Input for which character they want to inspect
-    #Display options for what part of the character they would like to inspect (Class, Level, Inventory, Attributes, skills, Leave ,or Help Button)
-    #Input for choosing one of the displayed options
-    #if they choose inventory
-        #call inventory changer function
-    #or if they choose attributes
-        #use function from attribute_management.py
-    #or if they choose class & Level
-        #go to Class and level function
-    #or if they go to skills
-        #Go to skills menu
-    #if they choose leave
-        #exit this function
-    #if they ask for help
-        #display a brief help guide
+def inspection_de_character(char_dictionary):
+    while True:
+        #Display list of characters
+        print(f"Your characters are: {char_dictionary.keys()}")
+        #Input for which character they want to inspect
+        character = input("Which of the characters listed above would you like to inspect?\n Enter here: ").strip().title()
+        while character not in char_dictionary.keys():
+            character = input("That character does not exist or you mispelled something?\n Re-enter here: ").strip().title()
+        print("Character found successfully")
+        #Display options for what part of the character they would like to inspect (Class, Level, Inventory, Attributes, skills, Leave ,or Help Button)
+        #Input for choosing one of the displayed options
+        part_of_inspection = input("Would you like to:\n1)Class/Level\n2)Inventory\n3)Attributes\n4)Skills\n5)Leave\n6)Help\nEnter here: ").strip()
+        while not part_of_inspection.isnumeric():
+            part_of_inspection = input("Invalid input please try again here: ").strip()
+        
+        match part_of_inspection:
+            #if they choose class
+            case "1":
+                #call class function
+                print("Class function goes here")
+            #or if they choose inventory
+            case "2":
+                inventory_changer(character,char_dictionary)
+            #or if they choose attributes
+            case "3":
+                #use function from attribute_management.py
+                attribute_manager(char_dictionary,character)
+                #go to Class and level function
+            #or if they go to skills
+            case "4":
+                #Go to skills menu
+                print("skills goes here")
+            #if they choose leave
+            case "5":
+                #exit this function
+                break
+            #if they ask for help
+            case "6":
+                #display a brief help guide
+                print("Class and level have things")
     #return character dictionary
+    return char_dictionary
