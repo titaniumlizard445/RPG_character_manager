@@ -54,6 +54,7 @@
 import main
 import character_managment_functions.character_managment
 
+
 def check_each_char(word,type_checking):
     for x in word:
         if type_checking==int:
@@ -84,7 +85,8 @@ def search_and_compare(char_dict,stats):
             if len(char_dict)<2:
                 print("You dont have enough characters to compare.")
             return
-        print(char_dict)
+        for char,names_for_char in char_dict.items():
+            print(f"{char}:{names_for_char}")
         #get the characters that you want to compare and the stat
         while True:
             # Pryor: The characters will be saved as a set of dictionaries.
@@ -148,7 +150,7 @@ def main_menu():
         if choice==1:
             pass
         if choice==2:
-            pass
+            passm
         if choice==3:
             search_and_compare()
         if choice==0:
