@@ -44,7 +44,7 @@ def skill_requirements():
     #load in user, ask user: what stats do you want?
     #check by using skill requirements
     #add stat that is picked to user stats.
-    #attributes altered to accomodate for user skills.
+    #attributes altered to accommodate for user skills.
 
     
 
