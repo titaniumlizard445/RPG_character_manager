@@ -85,7 +85,8 @@ def search_and_compare(char_dict,stats):
             if len(char_dict)<2:
                 print("You dont have enough characters to compare.")
             return
-        print(char_dict)
+        for char,names_for_char in char_dict.items():
+            print(f"{char}:{names_for_char}")
         #get the characters that you want to compare and the stat
         while True:
             # Pryor: The characters will be saved as a set of dictionaries.
@@ -111,7 +112,8 @@ def search_and_compare(char_dict,stats):
             else:
                 print("There is no character with that name.")
         # Pryor: What is stats?
-        print(stats)
+        for stat,val in stats.items():
+            print(f"{stat}:{val}")
         while True:
             # Pryor: We're not just comparing the stats of the characters. We want to compare Class, Level, Race, and Stats.
             if user_input:= stupid_input(str,"What is the name of the stat that you want to compare from both characters stats: ") in char_dict:   
@@ -148,7 +150,7 @@ def main_menu():
         if choice==1:
             pass
         if choice==2:
-            pass
+            passm
         if choice==3:
             search_and_compare()
         if choice==0:
