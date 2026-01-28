@@ -84,13 +84,14 @@
                     # run level_up() function
 
 
-characters = {"Name":{
-                "Race":"Example", 
-               "Class":"Example", 
-               "Level":1, 
-               "Stats":{"Stat1":"Example Num"}, 
-               "Skills":{"Skill_name":"Skill_desc"}, 
-               "Inventory":{"Item_name":"Item_desc"},}}
+characters = {  
+                "Name":{
+                    "Race":("Example"), 
+                    "Class":("Example"), 
+                    "Level":1, 
+                    "Stats":{"Stat1":"Example Num"}, 
+                    "Skills":{"Skill_name":"Skill_desc"}, 
+                    "Inventory":{"Item_name":"Item_desc"},}}
 
 species_list = ["Human (+2 to Consitution)","Elf (+2 to Wisdom)","Dwarf (+2 to Strength)","Gnome (+2 to Intelligence)","Dragonborn (+2 to Dexterity)","Halfling (+2 to Charisma)"]
 actual_species_list = ["Human","Elf","Dwarf","Gnome","Dragonborn","Halfling"]
@@ -170,7 +171,7 @@ def create_character_stepone(species_list):
     if new_stats["Wisdom"] >= 13:
         available_classes.append("Wizard")
     if new_stats["Strength"] >= 13:
-        available_classes.apppend("Fighter")
+        available_classes.append("Fighter")
     if new_stats["Intelligence"] >= 13:
         available_classes.append("Sorcerer")   
     print("Available Classes:")
@@ -192,7 +193,51 @@ def create_character_stepone(species_list):
     
 def manage_inspect(characters,character_name):
     while True:
-        print(f"Name: {character_name}\nClass: {characters(character_name["Class"])}\nRace: {characters(character_name["Race"])}\nLevel: {characters(character_name["Level"])}")
-        break
+        print(f"Name: {character_name}\nClass: {characters[character_name]["Class"]}\nRace: {characters[character_name]["Race"]}\nLevel: {characters[character_name]["Level"]}")
+        change = input("Would you like to change character name or level? Y/N").strip().capitalize()
+        if change == "N":
+            # We'll need something here to go back to the character inspect menu
+            break
+        else:
+            item_to_change = input("Select item to change [Enter Number]\n1. Name\n2. Level\n3. Go Back").strip()
+            if item_to_change ==  "1":
+                while True:
+                    new_name = input("Enter the character's new name. Type 'Exit' to go back.").strip()
+                    if new_name == "exit" or new_name == "Exit":
+                        break
+                    else:
+                        check = input(f"Are you sure you want {new_name} to be your character's name? Y/N").strip().capitalize()
+                        if check == "Y":
+                            # figure out how to change key of a dictoinray
+                            # characters[character_name.keys()] = new_name
+                            characters[new_name] = characters.pop(character_name)
+                            character_name = new_name
+                            break
+                        else:
+                            continue
+            if item_to_change == "2":
+                while True:
+                    new_level = input(f"Current Level: {characters[character_name]["Level"]}\n What do you want your new level to be? You cannot set it to a lower number, and it cannot go above 20. Type 'Exit' to go back.").strip().capitalize()
+                    if new_level == "Exit":
+                        break
+                    elif new_level.isnumeric() is False or int(new_level) > 20 or int(new_level) <= characters[character_name]["Level"]:
+                        print("Invalid answer")
+                    else:
+                        check = input(f"Are you sure you want to set your character's level to {new_level}? Y/N").strip().capitalize()
+                        if check == "Y":
+                            old_level = characters[character_name]["Level"]
+                            characters[character_name]["Level"] = new_level
+                            # for _ in range(old_level):
+                                # level_up()
+                            break
+            if item_to_change == "3":
+                pass
+            continue_inspect = input("Do you want to change something else? Y/N").strip().capitalize()
+            if continue_inspect == "Y":
+                continue
+            else:
+                break
+
+
 
 manage_inspect(characters,"Name")
