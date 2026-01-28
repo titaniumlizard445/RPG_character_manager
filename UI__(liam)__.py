@@ -53,7 +53,8 @@
 #the stupid proofed input 
 import main
 import character_managment_functions.character_managment
-
+import Parker_Projects.attribute_management
+import Parker_Projects.inspect_character
 def check_each_char(word,type_checking):
     for x in word:
         if type_checking==int:
@@ -143,13 +144,13 @@ def user_help():
             print("Your class is like your job, it also sets what skills you have access to.")
         else:
             print("That is not an option.")
-def main_menu():
+def main_menu(species,char_dict):
     while True:
         choice=stupid_input(int,"1 to inspect character\n2 to create new character\n3 to search and compare characters\n0 to quit")
         if choice==1:
-            pass
+            Parker_Projects.inspect_character.inspection_de_character(char_dict)
         if choice==2:
-            pass
+            character_managment_functions.character_managment.create_character_stepone(species)
         if choice==3:
             search_and_compare()
         if choice==0:
