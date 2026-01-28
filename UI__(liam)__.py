@@ -149,7 +149,7 @@ def main_menu():
         if choice==1:
             pass
         if choice==2:
-            passm
+            pass
         if choice==3:
             search_and_compare()
         if choice==0:
