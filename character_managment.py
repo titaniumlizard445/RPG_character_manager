@@ -84,7 +84,8 @@
                     # run level_up() function
 
 
-import skills
+from skills import skills_available,skill_choice,skills_list
+
 
 
 characters = {
@@ -183,12 +184,13 @@ actual_species_list = ["Human","Elf","Dwarf","Gnome","Dragonborn","Halfling"]
 stats_list = ["Strength","Dexterity","Constitution","Wisdom","Intelligence","Charisma"]
 
 def create_character(species_list,characters): 
-    new_character = {}
     new_stats = {"Strength":0,"Dexterity":0,"Constitution":0,"Wisdom":0,"Intelligence":0,"Charisma":0}
     while True:
-        character_name = input("What will the name of your character be?").strip()
-        check = input(f"Are you sure you want {character_name} to be your character's name? Y/N").strip().capitalize()
+        character_name = input("What will the name of your character be?\nEnter here: ").strip()
+        check = input(f"Are you sure you want {character_name} to be your character's name? Y/N: ").strip().capitalize()
         if check == "Y":
+            characters[character_name] = {}
+            characters[character_name]["Level"] = 1
             break
         else:
             continue
@@ -199,14 +201,14 @@ def create_character(species_list,characters):
         for i in species_list:
             count += 1
             print(f"{count}. {i}")
-        race = input("What will the race of your character be?").strip().capitalize()
+        race = input("What will the race of your character be?\nEnter here: ").strip().capitalize()
         if race not in actual_species_list:
             print("Invalid answer")
         else:
-            check = input(f"Are you sure you want {name} to be a {race}? It cannot be changed later. Y/N").strip().capitalize()
+            check = input(f"Are you sure you want {character_name} to be a {race}? It cannot be changed later. Y/N: ").strip().capitalize()
             if check == "Y":
                 race = tuple([race])
-                new_character["Race"] = race
+                characters[character_name]["Race"] = race
                 match race:
                     case "Human":
                         new_stats["Constitution"] += 2
@@ -237,13 +239,13 @@ def create_character(species_list,characters):
                         print("That would make the stat go over 20. Please enter a lower number.")
                         continue
                     else:
-                        check = input(f"{i}: {final_stat}. Are you sure this is what you want? Y/N").strip().capitalize()
+                        check = input(f"{i}: {final_stat}. Are you sure this is what you want? Y/N: ").strip().capitalize()
                         if check == "Y":
                             new_stats[i] = final_stat
                             break
                         else:
                             continue
-        new_character["Stats"] = new_stats
+        characters[character_name]["Stats"] = new_stats
         break
     available_classes = []
     if new_stats["Charisma"] >= 13:
@@ -262,43 +264,38 @@ def create_character(species_list,characters):
     for i in available_classes:
         print(i)
     while True:
-        class_choice = input("What class do you want to take?").strip().capitalize()
+        class_choice = input("What class do you want to take?\nEnter here: ").strip().capitalize()
         if class_choice not in available_classes:
             print("Invalid answer")
         else:
-            check = input(f"Are you sure you want to take {class_choice} as your class? Y/N").strip().capitalize()
+            check = input(f"Are you sure you want to take {class_choice} as your class? Y/N: ").strip().capitalize()
             if check == "Y":
                 class_choice = tuple([class_choice])
-                new_character["Class"] = class_choice
+                characters[character_name]["Class"] = class_choice
                 break
             else:
                 continue
     
     while True:
-        available_skills = skills.character_creation_skills(character_class = class_choice, level = 1, skills_list=skills.skills_list)
-        for i in range(2):
-            skills.skill_choice(skills.skills_list,available_skills,characters,)
+        available_skills = skills_available(characters,character_name,skills_list,level="Level")
+        for _ in range(2):
+            skill_choice(skills_list,available_skills,characters,create_character)
         break
     while True:
-        # picking items
-        # have user choose armor, weapons, and more general items
-        # make sure that is what user wants
+        
         break
 
-    characters[character_name] = new_character
-
-    print(new_character)
 
 def level_up(characters,character_name):
     while True:
-        choice = input("Would like to to gain +1 to a stat or gain a new skill? Skill/Stat").strip().capitalize()
+        choice = input("Would like to to gain +1 to a stat or gain a new skill? Skill/Stat: ").strip().capitalize()
         if choice == "Skill":
-            skills.skills_choice(skills.available_skills,characters,character_name)
+            skill_choice(skills_available,characters,character_name)
         elif choice == "Stat":
             while True:
                 for key, value in characters[character_name["Stats"]]:
                     print(f"{key}: {value}")
-                stat = input("What stat would you like to increase? Enter number:\n1. Strength\n2. Dexterity\n3. Constitution\n4. Wisdom\n5. Intellgience\n6. Charisma").strip()
+                stat = input("What stat would you like to increase? Enter number:\n1. Strength\n2. Dexterity\n3. Constitution\n4. Wisdom\n5. Intellgience\n6. Charisma\nEnter here:").strip()
                 match stat:
                     case "1":
                         if characters[character_name]["Stats"]["Strength"] == 20:
@@ -345,19 +342,19 @@ def level_up(characters,character_name):
                     case _:
                         print("Invalid answer")
                         continue
-    
+
 def manage_inspect(characters,character_name):
     while True:
         print(f"Name: {character_name}\nRace: {characters[character_name]["Race"]}\nClass: {characters[character_name]["Class"]}\nLevel: {characters[character_name]["Level"]}")
-        change = input("Would you like to edit the Name or Level of your character? Y/N").strip().capitalize()
+        change = input("Would you like to edit the Name or Level of your character? Y/N: ").strip().capitalize()
         if change == "N":
             break
         elif change == "Y":
-            item_to_change = input("Name or Level?").strip().capitalize()
+            item_to_change = input("Name or Level?\nEnter here: ").strip().capitalize()
             if item_to_change == "Name":
                 while True:
-                    new_name = input("Enter the new name of your character.")
-                    check = input(f"Are you sure you want {new_name} to tbe the name of your character? Y/N").strip().capitalize()
+                    new_name = input("Enter the new name of your character: ")
+                    check = input(f"Are you sure you want {new_name} to tbe the name of your character? Y/N: ").strip().capitalize()
                     if check == "Y":
                         characters[new_name] = characters[character_name].pop()
                         character_name = new_name
@@ -366,14 +363,14 @@ def manage_inspect(characters,character_name):
             elif item_to_change == "Level":
                 while True:
                     print(f"Current Level: {characters[character_name]["Level"]}")
-                    new_level = input("What do you want to change your level to? It can only be increased. Type 'Exit' to go back to the inspect menu.").strip().capitalize()
+                    new_level = input("What do you want to change your level to? It can only be increased. Type 'Exit' to go back to the inspect menu.\nEnter here: ").strip().capitalize()
                     if new_level == "Exit":
                         return character_name
                     elif new_level.isnumeric() is False or int(new_level) > 20 or new_level < characters[character_name]["Level"]:
                         print("Please enter a valid answer.")
                         continue
                     else:
-                        check = input(f"Are you sure you want to set your character's level to {new_level}? Y/N").strip().capitalize()
+                        check = input(f"Are you sure you want to set your character's level to {new_level}? Y/N: ").strip().capitalize()
                         if check == "Y":
                             old_level = characters[character_name]["Level"]
                             new_level = int(new_level)

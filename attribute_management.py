@@ -1,9 +1,12 @@
 #PS 1st attribute manager
+#
 
+#
 from character_managment import characters
 from UI_liam import print_indict_dictionaries
 
 #function called attribute_manager(character dictionary, character chosen)
+
 def attribute_manager(char_dict,character):
   #Display attributes of chosen character
   print(char_dict[character]["stats"])
@@ -20,7 +23,7 @@ def attribute_manager(char_dict,character):
       #if yes
       if change == "y":
         #ask for what they want to update the value to
-        new_value = int(input(f"Enter the number for: {char_dict[character]["stats"][x.keys()]} here:").strip())
+        new_value = int(input(f"Enter the number for: {char_dict[character]["stats"][x.keys()]} here: ").strip())
         #Update the value
         char_dict[character]["stats"][x] = new_value
     #display that it is done with the attribute changer
@@ -30,11 +33,11 @@ def attribute_manager(char_dict,character):
 
 def stat_change(characters,character_name,stat):
   while True:
-    new_stat = input(f"What do you want to change {stat} to? It cannot go above 20 or below 1.").strip()
+    new_stat = input(f"What do you want to change {stat} to? It cannot go above 20 or below 1.\nEnter here: ").strip()
     if new_stat.isnumeric() is False or int(new_stat) > 20 or int(new_stat) < 1:
       print("Please enter a valid answer.")
     else:
-      check = input(f"Are you sure you want to set {stat} to {new_stat}? Y/N").strip().capitalize()
+      check = input(f"Are you sure you want to set {stat} to {new_stat}? Y/N: ").strip().capitalize()
       if check == "Y":
         characters[character_name]["Stats"][stat] = int(new_stat)
       else:
@@ -43,7 +46,7 @@ def stat_change(characters,character_name,stat):
 def attribute_inspect(characters,character_name):
   while True:
     print_indict_dictionaries(characters, character_name, type = "Stats")
-    change = input("Would you like to change any of your attributes? Y/N").strip().capitalize()
+    change = input("Would you like to change any of your attributes? Y/N: ").strip().capitalize()
     if change == "N":
       return
     elif change == "Y":

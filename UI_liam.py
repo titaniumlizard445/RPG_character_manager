@@ -54,6 +54,13 @@
 
 # If the user is confused this function will help.
 # Pryor: I don't think we're gonna be having a help function.
+def stupid_input(type_return,prompt,invalid_prompt):
+    while True:
+        try:
+            return type_return(input(prompt))
+        except:
+            print(invalid_prompt)
+
 def user_help():
     while True:
         help_with=stupid_input(int,"1 for help with classes\n2 for help with level\n3 for help with inventory\n4 for help with attributes\n5 for help with skills\n6 to go back\nwhat do you want: ","that is not an option")
@@ -128,7 +135,7 @@ def character_comparison(characters):
         print(f"{count}. {i}")
 
     while True:
-        character_one = input("Enter first character to compare; Name must be entered exactly as seen on list.")
+        character_one = input("Enter first character to compare; Name must be entered exactly as seen on list.\nEnter here: ")
         if character_one not in list(characters.keys()):
             print("Invalid answer")
             continue
@@ -154,3 +161,23 @@ def character_comparison(characters):
     print_indict_dictionaries(characters, character_name=character_two, type="Skills")
 
 
+"""1
+Dave
+y
+Human
+y
+13
+y
+13
+y
+13
+y
+13
+y
+13
+y
+13
+y
+Bard
+y
+"""
