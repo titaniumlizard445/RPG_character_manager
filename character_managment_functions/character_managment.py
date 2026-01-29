@@ -191,5 +191,7 @@ def create_character_stepone(species_list):
     print(new_character)
     
 create_character_stepone(species_list)
+
+
     
 
