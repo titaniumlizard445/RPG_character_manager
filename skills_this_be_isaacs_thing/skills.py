@@ -44,27 +44,64 @@ def skill_requirements():
     #check by using skill requirements
     #add stat that is picked to user stats.
     #attributes altered to accommodate for user skills.
-rogue_skills = {'sneak_attack', 'parkour', 'pocket_sand', 'not_yours_to_take'}
-wizard_skills = {''}
-barbarian_skills = {}
-bard_skills = {'sick_lick','distracting_solo','power_chord',}
-fighter_skills = {}
 
-skills_list = [level_one = [rogue_skills = [], wizard_skills = [], bard_skills = [], fighter_skills = []]]
-def skills_available(skills_list,characters,character_name, level,):
-    available_skills = []
-    if characters[character_name][level] < 10:
-        match characters[character_name]['Class']:
+skills = {"Level 1-10":{ "Rouge Skills":{'Sneak Attack':"What do you think it is?", 'Parkour':"Do cool acrobratics acroos rooftops (while yelling 'Parkour!' of course)"},
+
+"Wizard Skills":{'Fireball':"It's a ball of fire. Boom!", 'Wrong Spell':'You cast the wrong spell! Its basically just wild magic.'},
+
+"Barbarian Skills":{'Rage':"Get angry and hit stuff harder!", 'Angry Bonk':"Get angry and hit stuff really really hard"},
+
+"Bard Skills":{'Sick Lick': 'Not saliva, but a diss so strong it makes people cry. Magic sold seperately.', 'Distracting_solo': 'Really distracting music.'},
+
+"Fighter Skills":{'Stab':"Just shank 'em, it works pretty well.", 'Tactical Yelling':"Yell so well it scared the enemies. Like a lot."},
+
+"Cleric Skills":{'Judgy Heal':"Heal someone, but with a heavy sigh to ecompany the heal. Your party really is the dumbest.", 'Divine “I Told You So"':"Give someone a hefty bonus to an action you said they should do."}
+},
+
+"Level 11-20":{"Rouge Skills":{'Pocket Sand':"Need something to blind your enemies? Pocket sand works!", 'Not Yours To Take':"I'm not even sure what this skill does."},
+
+"Wizard Skills":{'Mystical Firearm':"A gun, but it's magical.", 'Magic Tape':'This stuff can really fix anything!'},
+
+"Barbarian Skills":{'Too Angry To Die':"Death is for wusses that are calm.", 'Optional Physics':"Physics? Pff, who needs that? Get there instantaneously."},
+
+"Bard Skills":{'Power Chord': 'Hit a cord so hard that people are blown away. Literally', 'Platinum_Record':'Screw the haters. Slightly bend reality with just the power of music'},
+
+"Fighter Skills":{'Parry This':"An unblockable attack that really confuses the enemy.", 'Panic Attack' : "Oh crap a monster! Just hit something repeatedly with no end until it's dead, or you come to your senses."},
+
+"Cleric Skills":{"Holy Reverse":"Use the power of god to Uno Reverse Someone."}}}
+
+
+def skills_available(skills,characters,character_name, level, skills_list): 
+    
+    available_skills = set()
+    if characters[character_name][level] <= 10:
+        match characters[character_name]['class']:
             case 'Fighter':
-                available_skills.append(skills_list[level_10_below[fighter_skills]])
+                available_skills.append(skills[level_10_below["Fighter Skills"]])
             case 'Bard':
-                available_skills.append(skills_list[level_10_below[bard_skills]])
+                available_skills.append(skills[level_10_below["Bard Skills"]])
             case 'Wizard':
-                available_skills.append(skills_list[level_10_below[wizard_skills]])
+                available_skills.append(skills[level_10_below["Wizard Skills"]])
             case 'Rogue':
-                available_skills.append(skills_list[level_10_below[rogue_skills]])
+                available_skills.append(skills[level_10_below["Rouge Skills"]])
+            case 'Barbarian':
+                available_skills.append(skills[level_10_below["Barbarian Skills"]])
     return available_skills
 
-def skill_choice():
-    chosen_skill = input(f"Which skill do you want? Type the name of your chosen skill.{available_skills}").strip()
-    
+def skill_choice(skills,available_skills,characters,character_name):
+    print("Available Skills")
+    for i in available_skills:
+        print(i)
+    while True:
+        chosen_skill = input(f"Which skill do you want? Type the name of your chosen skill.").strip()
+        if chosen_skill in available_skills:
+            check = input(f"Are you sure you want to take {chosen_skill} as a skill? Y/N").strip().capitalize()
+            if check == "Y":
+                characters[character_name]["Skills"][available_skills] = (skills)# whatever we're gonna have for skill description
+                break
+            else:
+                continue
+        else:
+            print("Invalid answer")
+            continue
+

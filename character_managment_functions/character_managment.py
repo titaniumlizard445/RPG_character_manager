@@ -83,12 +83,12 @@
                 # per new level:
                     # run level_up() function
 
-
+from skills_this_be_isaacs_thing import available_skills,skill_choice
 characters = set({"Name":"Example",
                "Race":"Example", 
                "Class":"Example", 
                "Level":1, 
-               "Stats":{"Stat1":"Example Num"}, 
+               "Stats":{"Strength":10,"Dexterity":10,"Constitution":10,"Wisdom":10,"Intelligence":10,"Charisma",10}, 
                "Skills":{"Skill_name":"Skill_desc"}, 
                "Inventory":{"Item_name":"Item_desc"},})
 
@@ -189,6 +189,63 @@ def create_character_stepone(species_list):
                 continue
     
     print(new_character)
+
+def level_up(characters,character_name,skills_list):
+    while True:
+        choice = input("Would like to to gain +1 to a stat or gain a new skill? Skill/Stat").strip().capitalize()
+        if choice == "Skill":
+            skills_choice(available_skills,characters,character_name)
+        elif choice == "Stat":
+            while True:
+                for key, value in characters[character_name["Stats"]]:
+                    print(f"{key}: {value}")
+                stat = input("What stat would you like to increase? Enter number:\n1. Strength\n2. Dexterity\n3. Constitution\n4. Wisdom\n5. Intellgience\n6. Charisma").strip()
+                match stat:
+                    case "1":
+                        if characters[character_name]["Stats"]["Strength"] == 20:
+                            print("Strength is already 20, it cannot go any higher.")
+                            continue
+                        else:
+                            characters[character_name]["Stats"]["Strength"] += 1
+                            break
+                    case "2":
+                        if characters[character_name]["Stats"]["Dexterity"] == 20:
+                            print("Strength is already 20, it cannot go any higher.")
+                            continue
+                        else:
+                            characters[character_name]["Stats"]["Dexterity"] += 1
+                            break
+                    case "3":
+                        if characters[character_name]["Stats"]["Constitution"] == 20:
+                            print("Strength is already 20, it cannot go any higher.")
+                            continue
+                        else:
+                            characters[character_name]["Stats"]["Constitution"] += 1
+                            break
+                    case "4":
+                        if characters[character_name]["Stats"]["Wisdom"] == 20:
+                            print("Strength is already 20, it cannot go any higher.")
+                            continue
+                        else:
+                            characters[character_name]["Stats"]["Wisdom"] += 1
+                            break
+                    case "5":
+                        if characters[character_name]["Stats"]["Intelligence"] == 20:
+                            print("Strength is already 20, it cannot go any higher.")
+                            continue
+                        else:
+                            characters[character_name]["Stats"]["Intelligence"] += 1
+                            break
+                    case "6":
+                        if characters[character_name]["Stats"]["Charisma"] == 20:
+                            print("Strength is already 20, it cannot go any higher.")
+                            continue
+                        else:
+                            characters[character_name]["Stats"]["Charisma"] += 1
+                            break
+                    case _:
+                        print("Invalid answer")
+                        continue
     
 create_character_stepone(species_list)
 
