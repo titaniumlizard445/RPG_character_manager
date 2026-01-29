@@ -31,7 +31,6 @@ skills_list = {"Level 1-10":{ "Rouge Skills":{'Sneak Attack':"What do you think 
 
 "General Skills":{"Persuasion":"You are able to convince people of your viewpoint better.","Athletics":"You have better endurance and physical capabilities than most others.","Animal Handling":"You work much better with animals than other people do.","Intimidation":"Scare the crap out of people, for the fun of it."}}
 
-@debugger
 def skills_available(characters,character_name,skills_list,level): 
     
     available_skills = set()
