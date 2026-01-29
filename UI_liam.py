@@ -51,79 +51,7 @@
 #       else if1:
 #           output(your class is like your job, it also sets what you have access to)
 #the stupid proofed input 
-import main
-import character_managment_functions.character_managment
-import Parker_Projects.attribute_management
-import Parker_Projects.inspect_character
-def check_each_char(word,type_checking):
-    for x in word:
-        if type_checking==int:
-            if x in ["1","2","3","4","5","6","7","8","9","0"]:
-                continue
-            else:
-                return False
-        if type_checking==float:
-            if x in ["1","2","3","4","5","6","7","8","9","0","."]:
-                continue
-            else:
-                return False
-        else:
-            return True
-    return True
-def stupid_input(type_return,prompt="Input thy info: ",invalid_prompt="Invalid input"):
-    while True:
-        user_input=input(prompt)
-        if check_each_char(user_input,type_return):
-            return type_return(user_input)
-        else:
-            print(invalid_prompt)
-def search_and_compare(char_dict,stats):
-    while True:
-        # Liam: Makes sure the user wants to use.
-        # Pryor: They got here using a menu, this is redundant.
-        if stupid_input(str,"Do you want to use (y/n): ")=="n"or len(char_dict)<2:
-            if len(char_dict)<2:
-                print("You dont have enough characters to compare.")
-            return
-        for char,names_for_char in char_dict.items():
-            print(f"{char}:{names_for_char}")
-        # Liam: Get the characters that you want to compare and the stat.
-        while True:
-            # Pryor: The characters will be saved as a set of dictionaries.
-            # Pryor: Example Character
-            # characters = set({"Name":"Example",
-            #  "Race":"Example", 
-            # "Class":"Example", 
-            #"Level":1, 
-            # "Stats":{"Stat1":"Example Num"}, 
-            # "Skills":{"Skill_name":"Skill_desc"}, 
-            # "Inventory":{"Item_name":"Item_desc"},})
 
-            # Pryor: We might want to let the user choose how to search for the characters, such as by Name, Race, or Class.
-            if user_input:= stupid_input(str,"What is the name of the first character that you want to compare: ")in char_dict:
-                char1=char_dict[user_input]
-                break
-            else:
-                print("There is no character with that name.")
-        while True:  
-            if user_input:= stupid_input(str,"What is the name of the second character that you want to compare: ")in char_dict:
-                char2=char_dict[user_input]
-                break
-            else:
-                print("There is no character with that name.")
-        # Pryor: What is stats?
-        for stat,val in stats.items():
-            print(f"{stat}:{val}")
-        while True:
-            # Pryor: We're not just comparing the stats of the characters. We want to compare Class, Level, Race, and Stats.
-            if user_input:= stupid_input(str,"What is the name of the stat that you want to compare from both characters stats: ") in char_dict:   
-                # Pryor: There isn't a seperate stats dictionary.
-                stat=stats[user_input]
-                break
-            else:
-                print("There is no stat with that name.")
-                # Pryor: This is written like each character has its own seperate dictionary.
-        print(f"Character Name|{stat}\n{char1["name"]}:{char1[stat]}\n{char2["name"]}:{char2[stat]}")
 # If the user is confused this function will help.
 # Pryor: I don't think we're gonna be having a help function.
 def user_help():
@@ -144,63 +72,85 @@ def user_help():
             print("Your class is like your job, it also sets what skills you have access to.")
         else:
             print("That is not an option.")
-def main_menu(species,char_dict):
+
+
+def print_indict_dictionaries(characters, character_name, type):
+    if type == "Stats":
+        for k in characters[character_name]["Stats"].keys():
+            print(f"{k}:{characters[character_name]['Stats'][k]}")
+    elif type == "Skills":
+        for k in characters[character_name]["Skills"].keys():
+            print(f"{k}:{characters[character_name]['Skills'][k]}")
+    elif type == "Inventory":
+        for k in characters[character_name]["Inventory"].keys():
+            print(f"{k}:{characters[character_name]['Inventory'][k]}")
+
+
+def search_character(characters):
+    character_names = list(characters.keys())
+    characters_found = []
+    amount_of_characters = len(characters)
+
+    search_type = input("Search by Name, Class, or Level: ")
+
+    if search_type == "Name":
+        print("Names:")
+        for i in character_names:
+            print(i)
+        name = input("Enter name: \n")
+        if name in character_names:
+            characters_found.append(name)
+
+    elif search_type == "Class":
+        print("Classes")
+        print("Rouge\nFighter\nBarbarian\nCleric\nWizard\nBard")
+        class_name = input("Enter class: \n")
+        for i in range(amount_of_characters):
+            if class_name == characters[character_names[i]]["Class"]:
+                characters_found.append(character_names[i])
+
+    elif search_type == "Level":
+        level = input("Enter level (1-20) (Note: only characters of this exact level will show up.): ")
+        for i in range(amount_of_characters):
+            if level == str(characters[character_names[i]]["Level"]):
+                characters_found.append(character_names[i])
+
+    for i in characters_found:
+        print("Characters Found")
+        print(f"{i}, Level {characters[i]['Level']} {characters[i]['Race']} {characters[i]['Class']}")
+
+
+def character_comparison(characters):
+    print("Character Names")
+    count = 0
+    for i in characters.keys():
+        count += 1
+        print(f"{count}. {i}")
+
     while True:
-        choice=stupid_input(int,"1 to inspect character\n2 to create new character\n3 to search and compare characters\n0 to quit")
-        if choice==1:
-            Parker_Projects.inspect_character.inspection_de_character(char_dict)
-        if choice==2:
-            character_managment_functions.character_managment.create_character_stepone(species)
-        if choice==3:
-            search_and_compare()
-        if choice==0:
-            return
+        character_one = input("Enter first character to compare; Name must be entered exactly as seen on list.")
+        if character_one not in list(characters.keys()):
+            print("Invalid answer")
+            continue
+        else:
+            break
 
-
-
-
-
-
-
-
-# Liam: This is to debug.
-if __name__=="__main__":
-    test_char_dict={}
-    test_stats={}
-    print("""
-     ⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⢀⣠⡴⠾⠛⠋⠉⠉⠉⠉⠙⠛⠷⢦⣄⡀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⣠⣴⠟⢁⣠⠖⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣦⣄⠀⠀⠀⠀⠀
-⠀⠀⠀⢀⣼⠟⠁⣰⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣧⡀⠀⠀⠀
-⠀⠀⢀⡾⠁⢠⣾⡟⠁⠀⠀⠀⣠⣾⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠈⢷⡀⠀⠀
-⠀⢀⣾⠁⣠⣿⠏⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠈⣷⡀⠀
-⠀⢸⡇⠀⣿⠏⠀⠀⢀⣴⣷⡀⠻⣿⣿⣿⣿⠟⢀⣾⣦⡀⠀⠀⠀⠀⠀⢸⡇⠀
-⠀⢸⡇⠀⠀⠀⠀⠀⢸⣿⣿⣿⣦⣤⠈⠁⣤⣴⣿⣿⣿⡇⠀⠀⠀⢰⠃⢸⡇⠀
-⠀⠈⢿⡀⠀⠀⠀⠀⠀⠻⠿⡿⠿⠃⠀⠀⠘⠿⢿⠿⠟⠀⠀⠀⡰⠟⢀⡿⠁⠀
-⠀⠀⠈⢿⣤⡀⠀⣀⣤⣤⣤⣀⠀⠀⠀⠀⠀⠀⣀⣤⣤⣤⣀⠀⢀⣤⡿⠁⠀⠀
-⠀⠀⠀⠀⠉⠛⠛⠋⣡⣤⣌⠙⠻⠶⣦⣴⠶⠟⠋⣡⣤⣌⠙⠛⠛⠉⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⢀⣴⣶⠄⠠⣶⣦⡀⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⡏⠈⢿⣿⠀⠀⣿⡿⠁⢹⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⠀⠀⠉⠀⠀⠉⠀⠀⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀
- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀
-      _      _                 _             
-     | |    | |               (_)            
-   __| | ___| |__  _   _  __ _ _ _ __   __ _ 
-  / _` |/ _ \ '_ \| | | |/ _` | | '_ \ / _` |
- | (_| |  __/ |_) | |_| | (_| | | | | | (_| |
-  \__,_|\___|_.__/ \__,_|\__, |_|_| |_|\__, |
-                          __/ |         __/ |
-                         |___/         |___/           """)
     while True:
-        choice=stupid_input(int,"1 to test search and compare 2 to test user help 3 for main menu 0 to quit: ")
-        if choice==1:
-            search_and_compare(test_char_dict,test_stats)
-        if choice==2:
-            user_help()
-        if choice==3:
-            main_menu()
-        if choice==0:
-            quit()
-# Liam: Yes I am a Metroid fan.
-# Pryor: This ascii art just clutters your code.
-# Liam: Tt's an artistic choice, programming is a form of art.
+        character_two = input("Enter second character to compare; Name must also be entered exactly as seen on list.")
+        if character_two not in list(characters.keys()):
+            print("Invalid answer")
+            continue
+        else:
+            break
+
+    print(f"{character_one}'s Attributes")
+    print_indict_dictionaries(characters, character_name=character_one, type="Stats")
+    print(f"{character_one}'s Skills")
+    print_indict_dictionaries(characters, character_name=character_one, type="Skills")
+
+    print(f"{character_two}'s Attributes")
+    print_indict_dictionaries(characters, character_name=character_two, type="Stats")
+    print(f"{character_two}'s Skills")
+    print_indict_dictionaries(characters, character_name=character_two, type="Skills")
+
+
