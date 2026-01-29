@@ -2,6 +2,7 @@
 
 #import level up
 import random
+from character_managment_functions import level_up()
 #def skill requirements:
 def skill_requirements():
     #wizard skills = {Magic Missile, Fireball}
