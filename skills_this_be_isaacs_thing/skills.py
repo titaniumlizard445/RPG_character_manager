@@ -46,9 +46,9 @@ def skill_requirements():
     #attributes altered to accommodate for user skills.
 rogue_skills = {'sneak_attack', 'parkour', 'pocket_sand', 'not_yours_to_take'}
 wizard_skills = {''}
-barbarian_skills = {'rage', 'too_angry_to_die', 'angry_bonk', 'physics_is_optional'}
-bard_skills = {'sick_lick','distracting_solo','power_chord', 'platinum_record'}
-fighter_skills = {'stab', 'parry_this', 'tactical_yelling', 'stop_moving'}
+barbarian_skills = {}
+bard_skills = {'sick_lick','distracting_solo','power_chord',}
+fighter_skills = {}
 
 skills_list = [level_one = [rogue_skills = [], wizard_skills = [], bard_skills = [], fighter_skills = []]]
 def skills_available(skills_list,characters,character_name, level,):
