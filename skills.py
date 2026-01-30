@@ -2,7 +2,6 @@
 
 
 import random
-import character_managment
 
 
 skills_list = {"Level 1-10":{ "Rouge Skills":{'Sneak Attack':"What do you think it is?", 'Parkour':"Do cool acrobratics acroos rooftops (while yelling 'Parkour!' of course)"},
@@ -18,7 +17,7 @@ skills_list = {"Level 1-10":{ "Rouge Skills":{'Sneak Attack':"What do you think 
 "Cleric Skills":{'Judgy Heal':"Heal someone, but with a heavy sigh to ecompany the heal. Your party really is the dumbest.", 'Divine “I Told You So"':"Give someone a hefty bonus to an action you said they should do."}
 },
 
-"Level 11-20":{"Rouge Skills":{'Pocket Sand':"Need something to blind your enemies? Pocket sand works!", 'Not Yours To Take':"I'm not even sure what this skill does."},
+"Level 11-20":{"Rouge Skills":{'Pocket Sand':"Need something to blind your enemies? Pocket sand works!", 'Not Yours To Take':"Grab any item that does not weigh more than you, and is not bolted down."},
 
 "Wizard Skills":{'Mystical Firearm':"A gun, but it's magical.", 'Magic Tape':'This stuff can really fix anything!'},
 
@@ -32,12 +31,11 @@ skills_list = {"Level 1-10":{ "Rouge Skills":{'Sneak Attack':"What do you think 
 
 "General Skills":{"Persuasion":"You are able to convince people of your viewpoint better.","Athletics":"You have better endurance and physical capabilities than most others.","Animal Handling":"You work much better with animals than other people do.","Intimidation":"Scare the crap out of people, for the fun of it."}}
 
-
-def skills_available(characters,character_name, level, skills_list): 
+def skills_available(characters,character_name,skills_list,level): 
     
     available_skills = set()
-    if characters[character_name][level] <= 10:
-        match characters[character_name]['class']:
+    if characters[character_name]["Level"] < 10:
+        match characters[character_name]["Class"]:
             case 'Fighter':
                 for i in skills_list["Level 1-10"]["Fighter Skills"]:
                     available_skills.add(i)
@@ -57,7 +55,7 @@ def skills_available(characters,character_name, level, skills_list):
                 for i in skills_list["Level 1-10"]["Cleric Skills"]:
                     available_skills.add(i)
     else:
-        match characters[character_name]['class']:
+        match characters[character_name]["Class"]:
             case 'Fighter':
                 for i in skills_list["Level 11-20"]["Fighter Skills"]:
                     available_skills.add(i)
@@ -128,12 +126,13 @@ def character_creation_skills(character_class,level,skills_list):
 
 def skill_choice(skills_list,available_skills,characters,character_name):
     print("Available Skills")
+    print()
     for i in available_skills:
         print(i)
     while True:
-        chosen_skill = input(f"Which skill do you want? Type the name of your chosen skill.").strip()
+        chosen_skill = input(f"Which skill do you want? Type the name of your chosen skill.\nEnter here: ").strip()
         if chosen_skill in available_skills:
-            check = input(f"Are you sure you want to take {chosen_skill} as a skill? Y/N").strip().capitalize()
+            check = input(f"Are you sure you want to take {chosen_skill} as a skill? Y/N: ").strip().capitalize()
             if check == "Y":
                 characters[character_name]["Skills"][available_skills] = (skills_list)# whatever we're gonna have for skill description
                 break
@@ -142,4 +141,4 @@ def skill_choice(skills_list,available_skills,characters,character_name):
         else:
             print("Invalid answer")
             continue
-
+    return characters
