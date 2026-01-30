@@ -198,11 +198,9 @@ def create_character(species_list,characters):
 
     while True:
         print("Available Races")
-        count = 0
         for i in species_list:
-            count += 1
-            print(f"{count}. {i}")
-        race = input("What will the race of your character be?\nEnter here: ").strip().capitalize()
+            print(i)
+        race = input("What will the race of your character be?\nEnter here (name):\n ").strip().capitalize()
         if race not in actual_species_list:
             print("Invalid answer")
         else:
@@ -249,17 +247,17 @@ def create_character(species_list,characters):
         characters[character_name]["Stats"] = new_stats
         break
     available_classes = []
-    if new_stats["Charisma"] >= 13:
+    if new_stats["Charisma"] >= 10:
         available_classes.append("Bard")
-    if new_stats["Constitution"] >= 13:
+    if new_stats["Constitution"] >= 10:
         available_classes.append("Barbarian")        
-    if new_stats["Dexterity"] >= 13:
+    if new_stats["Dexterity"] >= 10:
         available_classes.append("Rouge")
-    if new_stats["Wisdom"] >= 13:
+    if new_stats["Wisdom"] >= 10:
         available_classes.append("Cleric")
-    if new_stats["Strength"] >= 13:
+    if new_stats["Strength"] >= 10:
         available_classes.append("Fighter")
-    if new_stats["Intelligence"] >= 13:
+    if new_stats["Intelligence"] >= 10:
         available_classes.append("Wizard")   
     print("Available Classes:")
     for i in available_classes:
@@ -278,12 +276,13 @@ def create_character(species_list,characters):
                 continue
     
     while True:
-        available_skills = skills_available(characters,character_name,level,character_class = class_choice)
-        for _ in range(2):
-            skill_choice(available_skills,characters,create_character)
+        class_choice = str(class_choice[0])
+        available_skills = skills_available(level,character_class = class_choice)
+        amount_of_skills = 2
+        skill_choice(available_skills,characters,character_name,amount_of_skills)
         break
     while True:
-        
+        # inventory
         break
 
 
