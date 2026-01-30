@@ -294,11 +294,11 @@ def available_items(characters, character_name, items):
 
 def inspect_inventory(characters,items, character_name):
     while True:
-        print()
+        
         change = input("Would you like to add or remove items from your inventory? Y/N: ").strip().capitalize()
         if change == "Y":
             while True:
-                print()
+                
                 add_remove = input("Are you adding or removing something from the inventory? Add/Remove: ").strip().capitalize()
                 
                 if add_remove == "Add":
@@ -309,15 +309,15 @@ def inspect_inventory(characters,items, character_name):
                             available_items_list.pop(i)
                     
                     if len(characters[character_name]["Inventory"]) == 7:
-                        print()
+                        
                         print("Your inventory is at max capacity. You first need to remove something.")
                         continue
                     else:
                         for i in available_items_list:
                             print(i)
-                    print()
+                    
                     item_to_add = input("What item would you like to add? Make sure to enter the name exactly as it is in the list.\nEnter here:  ")
-                    print()
+                    
                     check = input(f"Are you sure you want to add {item_to_add} to your inventory? Y/N: ").strip().capitalize()
                     
                     if check == "Y":
@@ -326,15 +326,15 @@ def inspect_inventory(characters,items, character_name):
                 
                 elif add_remove == "Remove":
                     if len(characters[character_name]["Inventory"]) == 0:
-                        print()
+                        
                         print("You have nothing in your inventory to remove. Add something to it first.")
                         break
                     else:
                         for i in characters[character_name]["Inventory"]:
                             print(i)
-                    print()
+                    
                     item_to_remove = input("What item would you like to remove? Enter the name exactly as it is seen on the list.\nEnter here:  ")
-                    print()
+                    
                     check = input(f"Are you sure you want to remove {item_to_remove} from your inventory? Y/N: ").strip().capitalize()
                     
                     if check == "Y":
@@ -342,7 +342,7 @@ def inspect_inventory(characters,items, character_name):
                     break  
                 
                 else:
-                    print()
+                    
                     print("Please enter 'Add' or 'Remove'.")
                     continue
         
@@ -350,15 +350,15 @@ def inspect_inventory(characters,items, character_name):
             break
         
         else:
-            print()
+            
             print("Please enter 'Y' or 'N'.")
 
 
 
 def character_inspect_menu(characters):
-    print()
+    
     print("Character Names")
-    print()
+    
     for i in characters.keys():
         print(i)
     while True:
@@ -367,7 +367,7 @@ def character_inspect_menu(characters):
             print("Enter a valid name.")
         else:
             while True:
-                print()
+                
                 inspect_type = input(f"Do you want to inspect {character_name}'s inventory, attributes, or race and class? Enter number:\n1. Inventory\n2. Attributes\n3. Race & Class\n4. Return to Main Menu\nEnter here:")
                 match inspect_type:
                     case "1":
