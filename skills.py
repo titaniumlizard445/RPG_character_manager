@@ -4,76 +4,66 @@
 import random
 
 
-skills_list = {"Level 1-10":{ "Rouge Skills":{'Sneak Attack':"What do you think it is?", 'Parkour':"Do cool acrobratics acroos rooftops (while yelling 'Parkour!' of course)"},
+ten_rouge_skills = {'Sneak Attack', 'Parkour'}
 
-"Wizard Skills":{'Fireball':"It's a ball of fire. Boom!", 'Wrong Spell':'You cast the wrong spell! Its basically just wild magic.'},
+ten_wizard_skills = {'Fireball', 'Wrong Spell'}
 
-"Barbarian Skills":{'Rage':"Get angry and hit stuff harder!", 'Angry Bonk':"Get angry and hit stuff really really hard"},
+ten_barbarian_skills = {'Rage', 'Angry Bonk'}
 
-"Bard Skills":{'Sick Lick': 'Not saliva, but a diss so strong it makes people cry. Magic sold seperately.', 'Distracting_solo': 'Really distracting music.'},
+ten_bard_skills = {'Sick Lick', 'Distracting Solo'}
 
-"Fighter Skills":{'Stab':"Just shank 'em, it works pretty well.", 'Tactical Yelling':"Yell so well it scared the enemies. Like a lot."},
+ten_fighter_skills = {'Stab', 'Tactical Yelling'}
 
-"Cleric Skills":{'Judgy Heal':"Heal someone, but with a heavy sigh to ecompany the heal. Your party really is the dumbest.", 'Divine “I Told You So"':"Give someone a hefty bonus to an action you said they should do."}
-},
+ten_cleric_skills = {'Judgy Heal', 'Divine "I told you so"'}
 
-"Level 11-20":{"Rouge Skills":{'Pocket Sand':"Need something to blind your enemies? Pocket sand works!", 'Not Yours To Take':"Grab any item that does not weigh more than you, and is not bolted down."},
 
-"Wizard Skills":{'Mystical Firearm':"A gun, but it's magical.", 'Magic Tape':'This stuff can really fix anything!'},
+twenty_rouge_skills = {'Pocket Sand', 'Not Yours to Take'}
 
-"Barbarian Skills":{'Too Angry To Die':"Death is for wusses that are calm.", 'Optional Physics':"Physics? Pff, who needs that? Get there instantaneously."},
+twenty_wizard_skills = {'Mystical Firearm', 'Magic Tape'}
 
-"Bard Skills":{'Power Chord': 'Hit a cord so hard that people are blown away. Literally', 'Platinum_Record':'Screw the haters. Slightly bend reality with just the power of music'},
+twenty_barbarian_skills = {'Too Angry to Die', 'Optional Physics'}
 
-"Fighter Skills":{'Parry This':"An unblockable attack that really confuses the enemy.", 'Panic Attack' : "Oh crap a monster! Just hit something repeatedly with no end until it's dead, or you come to your senses."},
+twenty_bard_skills = {'Power Chord', 'Platinum Record'}
 
-"Cleric Skills":{"Holy Reverse":"Use the power of god to Uno Reverse Someone."}}, 
+twenty_fighter_skills = {'Parry This', 'Panic Attack'}
 
-"General Skills":{"Persuasion":"You are able to convince people of your viewpoint better.","Athletics":"You have better endurance and physical capabilities than most others.","Animal Handling":"You work much better with animals than other people do.","Intimidation":"Scare the crap out of people, for the fun of it."}}
+twenty_cleric_skills = {'Holy Uno Reverse'}
 
-def skills_available(characters,character_name,skills_list,level): 
-    
+
+def skills_available(characters,character_name,level,character_class): 
+    global ten_rouge_skills,ten_wizard_skills,ten_barbarian_skills,ten_bard_skills,ten_fighter_skills,ten_cleric_skills
+
+    global twenty_rouge_skills,twenty_wizard_skills,twenty_barbarian_skills,twenty_bard_skills,twenty_fighter_skills,twenty_cleric_skills
     available_skills = set()
-    if characters[character_name]["Level"] < 10:
-        match characters[character_name]["Class"]:
+    if level < 10:
+        match character_class:
             case 'Fighter':
-                for i in skills_list["Level 1-10"]["Fighter Skills"]:
-                    available_skills.add(i)
+                available_skills.add(list(ten_fighter_skills))
             case 'Bard':
-                for i in skills_list["Level 1-10"]["Bard Skills"]:
-                    available_skills.add(i)
+                available_skills.add(list(ten_bard_skills))
             case 'Wizard':
-                for i in skills_list["Level 1-10"]["Wizard Skills"]:
-                    available_skills.add(i)
+                available_skills.add(list(ten_wizard_skills))
             case 'Rogue':
-                for i in skills_list["Level 1-10"]["Rogue Skills"]:
-                    available_skills.add(i)
+                available_skills.add(list(ten_rouge_skills))
             case 'Barbarian':
-                for i in skills_list["Level 1-10"]["Barbarian Skills"]:
-                    available_skills.add(i)
+                available_skills.add(list(ten_barbarian_skills))
             case 'Cleric':
-                for i in skills_list["Level 1-10"]["Cleric Skills"]:
-                    available_skills.add(i)
+                available_skills.add(list(ten_cleric_skills))
     else:
-        match characters[character_name]["Class"]:
+        match character_class:
             case 'Fighter':
-                for i in skills_list["Level 11-20"]["Fighter Skills"]:
-                    available_skills.add(i)
+                available_skills.add(list(twenty_fighter_skills))
             case 'Bard':
-                for i in skills_list["Level 11-20"]["Bard Skills"]:
-                    available_skills.add(i)
+                available_skills.add(list(twenty_bard_skills))
             case 'Wizard':
-                for i in skills_list["Level 11-20"]["Wizard Skills"]:
-                    available_skills.add(i)
+                available_skills.add(list(twenty_wizard_skills))
             case 'Rogue':
-                for i in skills_list["Level 11-20"]["Rogue Skills"]:
-                    available_skills.add(i)
+                available_skills.add(list(twenty_rouge_skills))
             case 'Barbarian':
-                for i in skills_list["Level 11-20"]["Barbarian Skills"]:
-                    available_skills.add(i)
+                available_skills.add(list(twenty_barbarian_skills))
             case 'Cleric':
-                for i in skills_list["Level 11-20"]["Cleric Skills"]:
-                    available_skills.add(i)
+                available_skills.add(list(twenty_cleric_skills))
+
     for i in available_skills:
         print(i)
     return available_skills
@@ -124,7 +114,7 @@ def character_creation_skills(character_class,level,skills_list):
         print(i)
     return available_skills
 
-def skill_choice(skills_list,available_skills,characters,character_name):
+def skill_choice(available_skills,characters,character_name):
     print("Available Skills")
     for i in available_skills:
         print(i)
@@ -133,11 +123,11 @@ def skill_choice(skills_list,available_skills,characters,character_name):
         if chosen_skill in available_skills:
             check = input(f"Are you sure you want to take {chosen_skill} as a skill? Y/N: ").strip().capitalize()
             if check == "Y":
-                characters[character_name]["Skills"][available_skills] = (skills_list)# whatever we're gonna have for skill description
+                characters[character_name]["Skills"].add(chosen_skill)
                 break
             else:
                 continue
         else:
             print("Invalid answer")
             continue
-    return characters
+    return

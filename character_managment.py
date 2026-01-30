@@ -84,7 +84,7 @@
                     # run level_up() function
 
 
-from skills import skills_available,skill_choice,skills_list
+from skills import skills_available,skill_choice
 
 
 
@@ -102,8 +102,8 @@ characters = {
             "Charisma": 13
         },
         "Skills": {
-            "Sneak Attack": "Deals extra damage when attacking from stealth",
-            "Lockpicking": "Can open locked doors and chests"
+            "Sneak Attack",
+            "Lockpicking"
         },
         "Inventory": {
             "Dagger": "A small but sharp blade",
@@ -191,6 +191,7 @@ def create_character(species_list,characters):
         if check == "Y":
             characters[character_name] = {}
             characters[character_name]["Level"] = 1
+            level = 1
             break
         else:
             continue
@@ -277,9 +278,9 @@ def create_character(species_list,characters):
                 continue
     
     while True:
-        available_skills = skills_available(characters,character_name,skills_list,level="Level")
+        available_skills = skills_available(characters,character_name,level,character_class = class_choice)
         for _ in range(2):
-            skill_choice(skills_list,available_skills,characters,create_character)
+            skill_choice(available_skills,characters,create_character)
         break
     while True:
         
