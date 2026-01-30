@@ -170,11 +170,9 @@ def create_character_stepone(species_list):
                             continue
         new_character["Stats"] = new_stats
         break
-    available_classes = []
+    available_classes = ["Barbarian"]
     if new_stats["Charisma"] >= 13:
-        available_classes.append("Bard")
-    if new_stats["Constitution"] >= 13:
-        available_classes.append("Barbarian")        
+        available_classes.append("Bard")       
     if new_stats["Dexterity"] >= 13:
         available_classes.append("Rouge")
     if new_stats["Wisdom"] >= 13:
@@ -262,4 +260,3 @@ def manage_inspect(characters,character_name):
 
 
 
-manage_inspect(characters,"Name")
