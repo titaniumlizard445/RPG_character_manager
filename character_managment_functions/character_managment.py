@@ -101,7 +101,9 @@ def create_character_stepone(species_list):
     new_character = {}
     new_stats = {"Strength":0,"Dexterity":0,"Constitution":0,"Wisdom":0,"Intelligence":0,"Charisma":0}
     while True:
+        print()
         name = input("What will the name of your character be?").strip()
+        print()
         check = input(f"Are you sure you want {name} to be your character's name? Y/N").strip().capitalize()
         if check == "Y":
             new_character["Name"] = name
@@ -110,15 +112,19 @@ def create_character_stepone(species_list):
             continue
 
     while True:
+        print()
         print("Available Races")
         count = 0
         for i in species_list:
             count += 1
             print(f"{count}. {i}")
+        print()
         race = input("What will the race of your character be?").strip().capitalize()
         if race not in actual_species_list:
+            print()
             print("Invalid answer")
         else:
+            print()
             check = input(f"Are you sure you want {name} to be a {race}? It cannot be changed later. Y/N").strip().capitalize()
             if check == "Y":
                 race = tuple(race)
@@ -142,14 +148,17 @@ def create_character_stepone(species_list):
     while True:
         for i in stats_list:
             while True:
+                print()
                 stat = input(f"What do you want your base stat for {i} to be?")
                 if stat.isnumeric() == False:
+                    print()
                     print("Invalid answer")
                     continue
                 else:
                     stat = int(stat)
                     final_stat = new_stats[i] + stat
                     if final_stat > 20:
+                        print()
                         print("That would make the stat go over 20. Please enter a lower number.")
                         continue
                     else:
@@ -173,39 +182,48 @@ def create_character_stepone(species_list):
     if new_stats["Strength"] >= 13:
         available_classes.append("Fighter")
     if new_stats["Intelligence"] >= 13:
-        available_classes.append("Sorcerer")   
+        available_classes.append("Sorcerer")  
+    print()
     print("Available Classes:")
     for i in available_classes:
         print(i)
     while True:
+        print()
         class_choice = input("What class do you want to take?").strip().capitalize()
         if class_choice not in available_classes:
+            print()
             print("Invalid answer")
         else:
+            print()
             check = input(f"Are you sure you want to take {class_choice} as your class? Y/N").strip().capitalize()
             if check == "Y":
                 new_character["Class"] = class_choice
                 break
             else:
                 continue
-    
+    print()
     print(new_character)
     
 def manage_inspect(characters,character_name):
     while True:
+        print()
         print(f"Name: {character_name}\nClass: {characters[character_name]["Class"]}\nRace: {characters[character_name]["Race"]}\nLevel: {characters[character_name]["Level"]}")
+        print()
         change = input("Would you like to change character name or level? Y/N").strip().capitalize()
         if change == "N":
             # We'll need something here to go back to the character inspect menu
             break
         else:
+            print()
             item_to_change = input("Select item to change [Enter Number]\n1. Name\n2. Level\n3. Go Back").strip()
             if item_to_change ==  "1":
                 while True:
+                    print()
                     new_name = input("Enter the character's new name. Type 'Exit' to go back.").strip()
                     if new_name == "exit" or new_name == "Exit":
                         break
                     else:
+                        print()
                         check = input(f"Are you sure you want {new_name} to be your character's name? Y/N").strip().capitalize()
                         if check == "Y":
                             # figure out how to change key of a dictoinray
@@ -217,12 +235,15 @@ def manage_inspect(characters,character_name):
                             continue
             if item_to_change == "2":
                 while True:
+                    print()
                     new_level = input(f"Current Level: {characters[character_name]["Level"]}\n What do you want your new level to be? You cannot set it to a lower number, and it cannot go above 20. Type 'Exit' to go back.").strip().capitalize()
                     if new_level == "Exit":
                         break
                     elif new_level.isnumeric() is False or int(new_level) > 20 or int(new_level) <= characters[character_name]["Level"]:
+                        print()
                         print("Invalid answer")
                     else:
+                        print()
                         check = input(f"Are you sure you want to set your character's level to {new_level}? Y/N").strip().capitalize()
                         if check == "Y":
                             old_level = characters[character_name]["Level"]
@@ -232,6 +253,7 @@ def manage_inspect(characters,character_name):
                             break
             if item_to_change == "3":
                 pass
+            print()
             continue_inspect = input("Do you want to change something else? Y/N").strip().capitalize()
             if continue_inspect == "Y":
                 continue
