@@ -125,8 +125,8 @@ def character_creation_skills(character_class,level,skills_list):
     return available_skills
 
 def skill_choice(skills_list,available_skills,characters,character_name):
-    print("Available Skills")
-    
+    print("Available Sksills")
+    print(skills_list)
     for i in available_skills:
         print(i)
     while True:
