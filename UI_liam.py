@@ -86,8 +86,8 @@ def print_indict_dictionaries(characters, character_name, type):
         for k in characters[character_name]["Stats"].keys():
             print(f"{k}:{characters[character_name]['Stats'][k]}")
     elif type == "Skills":
-        for k in characters[character_name]["Skills"].keys():
-            print(f"{k}:{characters[character_name]['Skills'][k]}")
+        for i in characters[character_name]["Skills"]:
+            print(i)
     elif type == "Inventory":
         for k in characters[character_name]["Inventory"].keys():
             print(f"{k}:{characters[character_name]['Inventory'][k]}")

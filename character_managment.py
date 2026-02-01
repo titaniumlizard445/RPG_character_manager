@@ -90,8 +90,8 @@ from skills import skills_available,skill_choice
 
 characters = {
     "Dorkus": {
-        "Race": "Human",
-        "Class": "Rogue",
+        "Race": ("Human"),
+        "Class": ("Rogue"),
         "Level": 1,
         "Stats": {
             "Strength": 13,
@@ -182,8 +182,9 @@ characters = {
 species_list = ["Human (+2 to Consitution)","Elf (+2 to Wisdom)","Dwarf (+2 to Strength)","Gnome (+2 to Intelligence)","Dragonborn (+2 to Dexterity)","Halfling (+2 to Charisma)"]
 actual_species_list = ["Human","Elf","Dwarf","Gnome","Dragonborn","Halfling"]
 stats_list = ["Strength","Dexterity","Constitution","Wisdom","Intelligence","Charisma"]
+classes_list = ['Bard','Barbarian','Rouge','Cleric','Fighter','Wizard']
 
-def create_character(species_list,characters): 
+def create_character(species_list,classes_list,characters): 
     new_stats = {"Strength":0,"Dexterity":0,"Constitution":0,"Wisdom":0,"Intelligence":0,"Charisma":0}
     while True:
         character_name = input("What will the name of your character be?\nEnter here: ").strip()
@@ -245,26 +246,13 @@ def create_character(species_list,characters):
                         else:
                             continue
         characters[character_name]["Stats"] = new_stats
-        break
-    available_classes = []
-    if new_stats["Charisma"] >= 10:
-        available_classes.append("Bard")
-    if new_stats["Constitution"] >= 10:
-        available_classes.append("Barbarian")        
-    if new_stats["Dexterity"] >= 10:
-        available_classes.append("Rouge")
-    if new_stats["Wisdom"] >= 10:
-        available_classes.append("Cleric")
-    if new_stats["Strength"] >= 10:
-        available_classes.append("Fighter")
-    if new_stats["Intelligence"] >= 10:
-        available_classes.append("Wizard")   
+        break   
     print("Available Classes:")
-    for i in available_classes:
+    for i in classes_list:
         print(i)
     while True:
         class_choice = input("What class do you want to take?\nEnter here: ").strip().capitalize()
-        if class_choice not in available_classes:
+        if class_choice not in classes_list:
             print("Invalid answer")
         else:
             check = input(f"Are you sure you want to take {class_choice} as your class? Y/N: ").strip().capitalize()
@@ -276,10 +264,13 @@ def create_character(species_list,characters):
                 continue
     
     while True:
+        characters[character_name]["Skills"] = set()
         class_choice = str(class_choice[0])
         available_skills = skills_available(level,character_class = class_choice)
         amount_of_skills = 2
-        skill_choice(available_skills,characters,character_name,amount_of_skills)
+        new_skills = skill_choice(available_skills,characters,character_name,amount_of_skills)
+        for i in new_skills:
+            characters[character_name]["Skills"].add(i)
         break
     while True:
         # inventory
@@ -290,11 +281,14 @@ def level_up(characters,character_name):
     while True:
         choice = input("Would like to to gain +1 to a stat or gain a new skill? Skill/Stat: ").strip().capitalize()
         if choice == "Skill":
-            skill_choice(skills_available,characters,character_name)
+            class_choice = characters[character_name]["Class"]
+            level = characters[character_name]["Level"]
+            available_skills = skills_available(level,character_class = class_choice)
+            skill_choice(available_skills,characters,character_name,amount_of_skills=1)
         elif choice == "Stat":
             while True:
-                for key, value in characters[character_name["Stats"]]:
-                    print(f"{key}: {value}")
+                for k in characters[character_name]["Stats"].keys():
+                    print(f"{k}: {characters[character_name]["Stats"][k]}")
                 stat = input("What stat would you like to increase? Enter number:\n1. Strength\n2. Dexterity\n3. Constitution\n4. Wisdom\n5. Intellgience\n6. Charisma\nEnter here:").strip()
                 match stat:
                     case "1":
@@ -345,7 +339,7 @@ def level_up(characters,character_name):
 
 def manage_inspect(characters,character_name):
     while True:
-        print(f"Name: {character_name}\nRace: {characters[character_name]["Race"]}\nClass: {characters[character_name]["Class"]}\nLevel: {characters[character_name]["Level"]}")
+        print(f"Name: {character_name}\nRace: {str(characters[character_name]["Race"][0])}\nClass: {str(characters[character_name]["Class"][0])}\nLevel: {characters[character_name]["Level"]}")
         change = input("Would you like to edit the Name or Level of your character? Y/N: ").strip().capitalize()
         if change == "N":
             break
@@ -366,7 +360,7 @@ def manage_inspect(characters,character_name):
                     new_level = input("What do you want to change your level to? It can only be increased. Type 'Exit' to go back to the inspect menu.\nEnter here: ").strip().capitalize()
                     if new_level == "Exit":
                         return character_name
-                    elif new_level.isnumeric() is False or int(new_level) > 20 or new_level < characters[character_name]["Level"]:
+                    elif new_level.isnumeric() is False or int(new_level) > 20 or int(new_level) < characters[character_name]["Level"]:
                         print("Please enter a valid answer.")
                         continue
                     else:
@@ -377,6 +371,7 @@ def manage_inspect(characters,character_name):
                             characters[character_name]["Level"] = new_level
                             for _ in range(new_level - old_level):
                                 level_up(characters,character_name)
+                            break
                         else:
                             continue
             else:

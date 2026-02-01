@@ -5,6 +5,7 @@
 #import attribute manager
 from attribute_management import attribute_inspect
 from character_managment import manage_inspect,characters
+from UI_liam import print_indict_dictionaries
 #function for inventory changer (character chosen, character dictionary)
 
 
@@ -357,7 +358,7 @@ def character_inspect_menu(characters):
             print("Enter a valid name.")
         else:
             while True:
-                inspect_type = input(f"Do you want to inspect {character_name}'s inventory, attributes, or race and class? Enter number:\n1. Inventory\n2. Attributes\n3. Race & Class\n4. Return to Main Menu\nEnter here:")
+                inspect_type = input(f"Do you want to inspect {character_name}'s inventory, attributes, skills, or race and class? Enter number:\n1. Inventory\n2. Attributes\n3. Skills\n4. Race and Class\n5. Return to main menu\nEnter here:\n")
                 match inspect_type:
                     case "1":
                         inspect_inventory(characters, character_name, items)
@@ -365,10 +366,12 @@ def character_inspect_menu(characters):
                         attribute_inspect(characters,character_name)
                         pass
                     case "3":
-                        manage_inspect(characters,character_name)
+                        print_indict_dictionaries(characters,character_name,type = "Skills")
                     case "4":
-                        return
+                        manage_inspect(characters,character_name)
+                    case "5":
+                        break
                     case _:
-                        print("Please enter 1, 2, 3, or 4 as your answer.")
+                        print("Please enter 1, 2, 3, 4, or 5 as your answer.")
                         continue
                     

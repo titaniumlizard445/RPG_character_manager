@@ -1,5 +1,5 @@
 #PS main file for character manager
-from character_managment import create_character,characters,species_list
+from character_managment import create_character,characters,species_list,classes_list
 from UI_liam import character_comparison, search_character
 from inspect_character import character_inspect_menu
 
@@ -12,7 +12,7 @@ def main_menu():
         menu_choice = input("What would you like to do? Enter number:\n").strip()
         match menu_choice:
             case "1":
-                create_character(species_list,characters)
+                create_character(species_list,classes_list,characters)
             case "2":
                 character_inspect_menu(characters)
                 pass
