@@ -67,7 +67,7 @@ def user_help():
     print("Create Character: Go through the process to build a level one character.\nInspect Character: Look at the stats, inventory, attributes, or other details of a character that already exists.\nSearch Character: Search for a character by Name, Class, or Level.\nCompare Characters: Compare the skills and attributes of two different characters.")
 
 
-def print_indict_dictionaries(characters, character_name,item, type):
+def print_indict_dictionaries(characters, character_name,type):
     if type == "Stats":
         for k,v in characters[character_name]["Stats"].items():
             print(f"{k}:{v}")
@@ -75,14 +75,16 @@ def print_indict_dictionaries(characters, character_name,item, type):
         for i in characters[character_name]["Skills"]:
             print(i)
     elif type == "Inventory":
+        print(f"{character_name}'s Inventory")
         for ke,va in characters[character_name]["Inventory"].items():
-            print(f"{ke}:{va["Description"]}")
-    elif type == "Item":
-        for key, val in characters[character_name]["Inventory"][item].items():
-            print(f"{key}:\n Description:{val["Description"]}\nValue:{val["Value"]}\nWeight\n{val["Weight"]}")
+            print(f"{ke}:\nDescription: {va["Description"]}\nValue: {va["Value"]}\nWeight: {va["Weight"]}\n")
+   
 
 
 def search_character(characters):
+    if bool(characters) == False:
+        print("You have no characters.")
+        return
     character_names = list(characters.keys())
     characters_found = []
     amount_of_characters = len(characters)
@@ -117,6 +119,9 @@ def search_character(characters):
 
 
 def character_comparison(characters):
+    if len(characters.keys()) < 2:
+        print("You need at least two character to be able to compare them.")
+        return
     print("Character Names")
     count = 0
     for i in characters.keys():

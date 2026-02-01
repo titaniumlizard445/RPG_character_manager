@@ -4,269 +4,27 @@
 
 #import attribute manager
 from attribute_management import attribute_inspect
-from character_managment import manage_inspect,characters
+from character_managment import manage_inspect,characters,available_items,items
 from UI_liam import print_indict_dictionaries
 #function for inventory changer (character chosen, character dictionary)
 
 
 
-items = {
-    "Rouge_items": {
-        "Daggers": {
-            "Description": "A pair of daggers.",
-            "Weight": "2 pounds",
-            "Value": "5 Gold pieces",
-            "Damage": "1d4"
-        },
-        "Rapier": {
-            "Description": "An old European sword with a thin, fast blade.",
-            "Weight": "3 pounds",
-            "Value": "25 Gold pieces",
-            "Damage": "1d8"
-        },
-        "Leather Armor": {
-            "Description": "Basic leather armor",
-            "Weight": "10 pounds",
-            "Value": "10 Gold",
-            "AC": "11 + Dex Modifier"
-        },
-        "Lockpicks": {
-            "Description": "A set of lockpicks that can unlock many doors, if you have the skill.",
-            "Value": "2 Gold",
-            "Weight": "½ pound"
-        },
-        "Fake ID": {
-            "Description": "A fake ID that can get you many places you shouldn’t be.",
-            "Value": "Varies",
-            "Weight": "Insignificant"
-        }
-    },
-
-    "Fighter_items": {
-        "Greatsword": {
-            "Description": "A large two-handed sword ideal for heavy attacks.",
-            "Weight": "6 pounds",
-            "Value": "50 Gold pieces",
-            "Damage": "2d6"
-        },
-        "Poleaxe": {
-            "Description": "A versatile weapon with an axe blade, hammer, and spike.",
-            "Weight": "7 pounds",
-            "Value": "40 Gold pieces",
-            "Damage": "1d10"
-        },
-        "Chainmail": {
-            "Description": "Interlocked metal rings providing solid protection.",
-            "Weight": "20 pounds",
-            "Value": "75 Gold",
-            "AC": "16"
-        },
-        "Full Plate": {
-            "Description": "Heavy plate armor covering the entire body.",
-            "Weight": "50 pounds",
-            "Value": "150 Gold",
-            "AC": "18"
-        },
-        "Military Insignia": {
-            "Description": "A symbol representing rank and affiliation.",
-            "Value": "10 Gold",
-            "Weight": "1 pound"
-        },
-        "Battle Trinket": {
-            "Description": "A personal charm carried into battle for luck.",
-            "Value": "5 Gold",
-            "Weight": "Negligible"
-        }
-    },
-
-    "Barbarian_items": {
-        "Warhammer": {
-            "Description": "A heavy hammer designed for crushing armor.",
-            "Weight": "5 pounds",
-            "Value": "30 Gold",
-            "Damage": "1d8"
-        },
-        "Greataxe": {
-            "Description": "A massive axe for devastating swings.",
-            "Weight": "7 pounds",
-            "Value": "35 Gold",
-            "Damage": "1d12"
-        },
-        "Chainmail": {
-            "Description": "Interlocked metal rings providing solid protection.",
-            "Weight": "20 pounds",
-            "Value": "75 Gold",
-            "AC": "16"
-        },
-        "Stress Toy": {
-            "Description": "Something to make sure the barbarian doesn’t rage during a fine(ish) dinner, or any other situation.",
-            "Value": "1 Gold",
-            "Weight": "Negligible"
-        },
-        "Unidentified Blood Vial": {
-            "Description": "A vial of blood that the barbarian won’t say where or what it’s from.",
-            "Value": "Unknown",
-            "Weight": "Negligible"
-        }
-    },
-
-    "Cleric_items": {
-        "Holy Staff": {
-            "Description": "A staff imbued with divine power.",
-            "Weight": "4 pounds",
-            "Value": "20 Gold",
-            "Damage": "1d6"
-        },
-        "Robes": {
-            "Description": "Simple robes that offer minimal protection.",
-            "Weight": "3 pounds",
-            "Value": "5 Gold",
-            "AC": "10"
-        },
-        "Leather": {
-            "Description": "Light leather armor for additional protection.",
-            "Weight": "10 pounds",
-            "Value": "10 Gold",
-            "AC": "11 + Dex Modifier"
-        },
-        "Holy Symbol": {
-            "Description": "A symbol representing the cleric's deity.",
-            "Value": "15 Gold",
-            "Weight": "1 pound"
-        },
-        "Scriptures": {
-            "Description": "Religious texts for prayer and guidance.",
-            "Value": "10 Gold",
-            "Weight": "2 pounds"
-        }
-    },
-
-    "Wizard_items": {
-        "Magic Focus": {
-            "Description": "An object used to channel magical energy.",
-            "Weight": "1 pound",
-            "Value": "30 Gold",
-            "Damage": "Varies by spell"
-        },
-        "Leather": {
-            "Description": "Light armor providing minimal protection.",
-            "Weight": "10 pounds",
-            "Value": "10 Gold",
-            "AC": "11 + Dex Modifier"
-        },
-        "Textbooks": {
-            "Description": "Books full of spells, theories, and magical research.",
-            "Value": "50 Gold",
-            "Weight": "10 pounds"
-        },
-        "Really Cool Hat": {
-            "Description": "A really tall wizard’s hat with stars and stuff on it.",
-            "Value": "Undetermined",
-            "Weight": "1 pound"
-        }
-    },
-
-    "Bard_items": {
-        "Instrument": {
-            "Description": "A musical instrument used for performance and magic.",
-            "Weight": "3 pounds",
-            "Value": "25 Gold",
-            "Damage": "1d4"
-        },
-        "Leather": {
-            "Description": "Light armor providing minimal protection.",
-            "Weight": "10 pounds",
-            "Value": "10 Gold",
-            "AC": "11 + Dex Modifier"
-        },
-        "Chainmail": {
-            "Description": "Interlocked metal rings providing solid protection.",
-            "Weight": "20 pounds",
-            "Value": "75 Gold",
-            "AC": "16"
-        },
-        "Notepad": {
-            "Description": "A book to jot down lyrics, stories, or magical notes.",
-            "Value": "2 Gold",
-            "Weight": "1 pound"
-        },
-        "Tuning Fork": {
-            "Description": "A tuning fork for the bard’s instrument.",
-            "Value": "5 Gold",
-            "Weight": "1 pound"
-        }
-    },
-
-    "General_Items": {
-        "Ropes": {
-            "Description": "Strong ropes for climbing or tying objects.",
-            "Value": "5 Gold",
-            "Weight": "5 pounds"
-        },
-        "Torches": {
-            "Description": "Standard torches for lighting dark areas.",
-            "Value": "1 Gold",
-            "Weight": "1 pound"
-        },
-        "First-aid kit": {
-            "Description": "Basic supplies for treating wounds.",
-            "Value": "10 Gold",
-            "Weight": "3 pounds"
-        },
-        "Potions": {
-            "Description": "Various potions for healing, mana, or temporary boosts.",
-            "Value": "Varies",
-            "Weight": "1 pound each"
-        }
-    }
-}
 
 
-def available_items(characters, character_name, items):
-    available_items = {}
-    character_class = characters[character_name]["Class"]
-    # Add general items
-    for key in items["General_Items"].keys():
-        available_items[key] = items["General_Items"][key]
 
-    # Add class-specific items
-    match character_class:
-        case "Rogue":
-            for key in items["Rouge_items"].keys():
-                available_items[key] = items["Rouge_items"][key]
 
-        case "Fighter":
-            for key in items["Fighter_items"].keys():
-                available_items[key] = items["Fighter_items"][key]
 
-        case "Barbarian":
-            for key in items["Barbarian_items"].keys():
-                available_items[key] = items["Barbarian_items"][key]
-
-        case "Cleric":
-            for key in items["Cleric_items"].keys():
-                available_items[key] = items["Cleric_items"][key]
-
-        case "Wizard":
-            for key in items["Wizard_items"].keys():
-                available_items[key] = items["Wizard_items"][key]
-
-        case "Bard":
-            for key in items["Bard_items"].keys():
-                available_items[key] = items["Bard_items"][key]
-
-    return available_items
 
 
 def inspect_inventory(characters,items, character_name):
     inventory = characters[character_name]["Inventory"]
-    for k,v in inventory.items():
-            print(f"{k}: {v["Description"]}")
+    print_indict_dictionaries(characters,character_name,type="Inventory")
     while True:
-        change = input("Would you like to add or remove items from your inventory, or inspect a specific item? Y/N: ").strip().capitalize()
+        change = input("Would you like to add or remove items from your inventory? Y/N:\n ").strip().capitalize()
         if change == "Y":
             while True:
-                inventory_function = input("Are you adding, removing, or inspecting something? Add/Remove/Inspect: ").strip().capitalize()
+                inventory_function = input("Are you adding or removing something? Add/Remove:\n").strip().capitalize()
                 
                 if inventory_function == "Add":
                     available_items_list = available_items(characters, character_name, items)
@@ -303,13 +61,6 @@ def inspect_inventory(characters,items, character_name):
                     if check == "Y":
                         inventory.pop(item_to_remove)
                     break  
-                elif inventory_function == "Inspect":
-                    while True:
-                        item = input("Which item would you like to inspect? Enter name exactly as seen in the list.")
-                        if item not in inventory:
-                            print("Please enter an item in the inventory.")
-                        else:
-                            print_indict_dictionaries(characters,character_name,item,type="Item")
                 else:
                     print("Please enter 'Add' or 'Remove'.")
                     continue
@@ -335,29 +86,37 @@ def inspect_inventory(characters,items, character_name):
 
 def character_inspect_menu(characters):
     print("Character Names")
-    for i in characters.keys():
-        print(i)
-    while True:
-        character_name = input("What character do you want to inspect? Enter name exactly as seen on the list: ").strip()
-        if character_name not in list(characters.keys()):
-            print("Enter a valid name.")
-        else:
-            while True:
-                inspect_type = input(f"Do you want to inspect {character_name}'s inventory, attributes, skills, or race and class? Enter number:\n1. Inventory\n2. Attributes\n3. Skills\n4. Race and Class\n5. Return to main menu\nEnter here:\n")
-                match inspect_type:
-                    case "1":
-                        inventory = inspect_inventory(characters, items, character_name)
-                        characters[character_name]["Inventory"] = inventory
-                    case "2":
-                        attribute_inspect(characters,character_name)
-                        pass
-                    case "3":
-                        print_indict_dictionaries(characters,character_name,type = "Skills")
-                    case "4":
-                        manage_inspect(characters,character_name)
-                    case "5":
-                        break
-                    case _:
-                        print("Please enter 1, 2, 3, 4, or 5 as your answer.")
-                        continue
+    if bool(characters) == False:
+        print("You have no characters currently.")
+        return
+    else:
+        for i in characters.keys():
+            print(i)
+        while True:
+            character_name = input("What character do you want to inspect? Enter name exactly as seen on the list: ").strip()
+            if character_name not in list(characters.keys()):
+                print("Enter a valid name.")
+            else:
+                while True:
+                    inspect_type = input(f"Do you want to inspect {character_name}'s inventory, attributes, skills, or race and class? Enter number:\n1. Inventory\n2. Attributes\n3. Skills\n4. Race and Class\n5. Return to main menu\nEnter here:\n")
+                    match inspect_type:
+                        case "1":
+                            inventory = inspect_inventory(characters, items, character_name)
+                            characters[character_name]["Inventory"] = inventory
+                        case "2":
+                            attribute_inspect(characters,character_name)
+                            pass
+                        case "3":
+                            print_indict_dictionaries(characters,character_name,type = "Skills")
+                        case "4":
+                            manage_inspect(characters,character_name)
+                        case "5":
+                            break
+                        case _:
+                            print("Please enter 1, 2, 3, 4, or 5 as your answer.")
+                            continue
                     
+
+
+    return inventory
+
