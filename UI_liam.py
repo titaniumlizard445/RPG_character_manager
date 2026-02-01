@@ -62,23 +62,9 @@ def stupid_input(type_return,prompt,invalid_prompt):
             print(invalid_prompt)
 
 def user_help():
-    while True:
-        help_with=stupid_input(int,"1 for help with classes\n2 for help with level\n3 for help with inventory\n4 for help with attributes\n5 for help with skills\n6 to go back\nwhat do you want: ","that is not an option")
-        # Pryor: You should be using match-case here.
-        if help_with==6:
-            return
-        elif help_with==5:
-            print("Skills are bonuses to abilities or new abilities.")
-        elif help_with==4:
-            print("Attributes are your base stats such as strength or chiasma.")
-        elif help_with==3:
-            print("Your inventory is what items you have.")
-        elif help_with==2:
-            print("Your level is your overall power and at higher levels you can get new stuff such as items new abilities or other things.")
-        elif help_with==1:
-            print("Your class is like your job, it also sets what skills you have access to.")
-        else:
-            print("That is not an option.")
+    print("Further Explanation")
+    print("This program is intended to be used as a character manager for role-playing games such as D&D. It can hold characters and their details, including inventory, skills, and attributes.")
+    print("Create Character: Go through the process to build a level one character.\nInspect Character: Look at the stats, inventory, attributes, or other details of a character that already exists.\nSearch Character: Search for a character by Name, Class, or Level.\nCompare Characters: Compare the skills and attributes of two different characters.")
 
 
 def print_indict_dictionaries(characters, character_name, type):
