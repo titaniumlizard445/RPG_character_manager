@@ -67,16 +67,19 @@ def user_help():
     print("Create Character: Go through the process to build a level one character.\nInspect Character: Look at the stats, inventory, attributes, or other details of a character that already exists.\nSearch Character: Search for a character by Name, Class, or Level.\nCompare Characters: Compare the skills and attributes of two different characters.")
 
 
-def print_indict_dictionaries(characters, character_name, type):
+def print_indict_dictionaries(characters, character_name,item, type):
     if type == "Stats":
-        for k in characters[character_name]["Stats"].keys():
-            print(f"{k}:{characters[character_name]['Stats'][k]}")
+        for k,v in characters[character_name]["Stats"].items():
+            print(f"{k}:{v}")
     elif type == "Skills":
         for i in characters[character_name]["Skills"]:
             print(i)
     elif type == "Inventory":
-        for k in characters[character_name]["Inventory"].keys():
-            print(f"{k}:{characters[character_name]['Inventory'][k]}")
+        for ke,va in characters[character_name]["Inventory"].items():
+            print(f"{ke}:{va["Description"]}")
+    elif type == "Item":
+        for key, val in characters[character_name]["Inventory"][item].items():
+            print(f"{key}:\n Description:{val["Description"]}\nValue:{val["Value"]}\nWeight\n{val["Weight"]}")
 
 
 def search_character(characters):

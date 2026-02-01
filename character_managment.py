@@ -106,8 +106,8 @@ characters = {
             "Lockpicking"
         },
         "Inventory": {
-            "Dagger": "A small but sharp blade",
-            "Lockpick Set": "Tools for opening locks"
+            "Dagger": {"Description":"A small but sharp blade.","Value":"5 gold","Weight":"1 pound"},
+            "Lockpick Set": {"Description":"Tools for opening locks.","Value":"10 gold","Weight":"Negligible"}
         }
     },
 

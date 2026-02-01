@@ -12,224 +12,188 @@ from UI_liam import print_indict_dictionaries
 
 items = {
     "Rouge_items": {
-        "Weapons": {
-            "Daggers": {
-                "Description": "A pair of daggers.",
-                "Weight": "2 pounds",
-                "Value": "5 Gold pieces",
-                "Damage": "1d4"
-            },
-            "Rapier": {
-                "Description": "An old European sword with a thin, fast blade.",
-                "Weight": "3 pounds",
-                "Value": "25 Gold pieces",
-                "Damage": "1d8"
-            }
+        "Daggers": {
+            "Description": "A pair of daggers.",
+            "Weight": "2 pounds",
+            "Value": "5 Gold pieces",
+            "Damage": "1d4"
         },
-        "Armor": {
-            "Leather Armor": {
-                "Description": "Basic leather armor",
-                "Weight": "10 pounds",
-                "Value": "10 Gold",
-                "AC": "11 + Dex Modifier"
-            }
+        "Rapier": {
+            "Description": "An old European sword with a thin, fast blade.",
+            "Weight": "3 pounds",
+            "Value": "25 Gold pieces",
+            "Damage": "1d8"
         },
-        "Other Items": {
-            "Lockpicks": {
-                "Description": "A set of lockpicks that can unlock many doors, if you have the skill.",
-                "Value": "2 Gold",
-                "Weight": "½ pound"
-            },
-            "Fake ID": {
-                "Description": "A fake ID that can get you many places you shouldn’t be.",
-                "Value": "Varies",
-                "Weight": "Insignificant"
-            }
+        "Leather Armor": {
+            "Description": "Basic leather armor",
+            "Weight": "10 pounds",
+            "Value": "10 Gold",
+            "AC": "11 + Dex Modifier"
+        },
+        "Lockpicks": {
+            "Description": "A set of lockpicks that can unlock many doors, if you have the skill.",
+            "Value": "2 Gold",
+            "Weight": "½ pound"
+        },
+        "Fake ID": {
+            "Description": "A fake ID that can get you many places you shouldn’t be.",
+            "Value": "Varies",
+            "Weight": "Insignificant"
         }
     },
 
     "Fighter_items": {
-        "Weapons": {
-            "Greatsword": {
-                "Description": "A large two-handed sword ideal for heavy attacks.",
-                "Weight": "6 pounds",
-                "Value": "50 Gold pieces",
-                "Damage": "2d6"
-            },
-            "Poleaxe": {
-                "Description": "A versatile weapon with an axe blade, hammer, and spike.",
-                "Weight": "7 pounds",
-                "Value": "40 Gold pieces",
-                "Damage": "1d10"
-            }
+        "Greatsword": {
+            "Description": "A large two-handed sword ideal for heavy attacks.",
+            "Weight": "6 pounds",
+            "Value": "50 Gold pieces",
+            "Damage": "2d6"
         },
-        "Armor": {
-            "Chainmail": {
-                "Description": "Interlocked metal rings providing solid protection.",
-                "Weight": "20 pounds",
-                "Value": "75 Gold",
-                "AC": "16"
-            },
-            "Full Plate": {
-                "Description": "Heavy plate armor covering the entire body.",
-                "Weight": "50 pounds",
-                "Value": "150 Gold",
-                "AC": "18"
-            }
+        "Poleaxe": {
+            "Description": "A versatile weapon with an axe blade, hammer, and spike.",
+            "Weight": "7 pounds",
+            "Value": "40 Gold pieces",
+            "Damage": "1d10"
         },
-        "Other Items": {
-            "Military Insignia": {
-                "Description": "A symbol representing rank and affiliation.",
-                "Value": "10 Gold",
-                "Weight": "1 pound"
-            },
-            "Battle Trinket": {
-                "Description": "A personal charm carried into battle for luck.",
-                "Value": "5 Gold",
-                "Weight": "Negligible"
-            }
+        "Chainmail": {
+            "Description": "Interlocked metal rings providing solid protection.",
+            "Weight": "20 pounds",
+            "Value": "75 Gold",
+            "AC": "16"
+        },
+        "Full Plate": {
+            "Description": "Heavy plate armor covering the entire body.",
+            "Weight": "50 pounds",
+            "Value": "150 Gold",
+            "AC": "18"
+        },
+        "Military Insignia": {
+            "Description": "A symbol representing rank and affiliation.",
+            "Value": "10 Gold",
+            "Weight": "1 pound"
+        },
+        "Battle Trinket": {
+            "Description": "A personal charm carried into battle for luck.",
+            "Value": "5 Gold",
+            "Weight": "Negligible"
         }
     },
 
     "Barbarian_items": {
-        "Weapons": {
-            "Warhammer": {
-                "Description": "A heavy hammer designed for crushing armor.",
-                "Weight": "5 pounds",
-                "Value": "30 Gold",
-                "Damage": "1d8"
-            },
-            "Greataxe": {
-                "Description": "A massive axe for devastating swings.",
-                "Weight": "7 pounds",
-                "Value": "35 Gold",
-                "Damage": "1d12"
-            }
+        "Warhammer": {
+            "Description": "A heavy hammer designed for crushing armor.",
+            "Weight": "5 pounds",
+            "Value": "30 Gold",
+            "Damage": "1d8"
         },
-        "Armor": {
-            "Chainmail": {
-                "Description": "Interlocked metal rings providing solid protection.",
-                "Weight": "20 pounds",
-                "Value": "75 Gold",
-                "AC": "16"
-            }
+        "Greataxe": {
+            "Description": "A massive axe for devastating swings.",
+            "Weight": "7 pounds",
+            "Value": "35 Gold",
+            "Damage": "1d12"
         },
-        "Other Items": {
-            "Stress Toy": {
-                "Description": "Something to make sure the barbarian doesn’t rage during a fine(ish) dinner, or any other situation.",
-                "Value": "1 Gold",
-                "Weight": "Negligible"
-            },
-            "Unidentified Blood Vial": {
-                "Description": "A vial of blood that the barbarian won’t say where or what it’s from.",
-                "Value": "Unknown",
-                "Weight": "Negligible"
-            }
+        "Chainmail": {
+            "Description": "Interlocked metal rings providing solid protection.",
+            "Weight": "20 pounds",
+            "Value": "75 Gold",
+            "AC": "16"
+        },
+        "Stress Toy": {
+            "Description": "Something to make sure the barbarian doesn’t rage during a fine(ish) dinner, or any other situation.",
+            "Value": "1 Gold",
+            "Weight": "Negligible"
+        },
+        "Unidentified Blood Vial": {
+            "Description": "A vial of blood that the barbarian won’t say where or what it’s from.",
+            "Value": "Unknown",
+            "Weight": "Negligible"
         }
     },
 
     "Cleric_items": {
-        "Weapons": {
-            "Holy Staff": {
-                "Description": "A staff imbued with divine power.",
-                "Weight": "4 pounds",
-                "Value": "20 Gold",
-                "Damage": "1d6"
-            }
+        "Holy Staff": {
+            "Description": "A staff imbued with divine power.",
+            "Weight": "4 pounds",
+            "Value": "20 Gold",
+            "Damage": "1d6"
         },
-        "Armor": {
-            "Robes": {
-                "Description": "Simple robes that offer minimal protection.",
-                "Weight": "3 pounds",
-                "Value": "5 Gold",
-                "AC": "10"
-            },
-            "Leather": {
-                "Description": "Light leather armor for additional protection.",
-                "Weight": "10 pounds",
-                "Value": "10 Gold",
-                "AC": "11 + Dex Modifier"
-            }
+        "Robes": {
+            "Description": "Simple robes that offer minimal protection.",
+            "Weight": "3 pounds",
+            "Value": "5 Gold",
+            "AC": "10"
         },
-        "Other Items": {
-            "Holy Symbol": {
-                "Description": "A symbol representing the cleric's deity.",
-                "Value": "15 Gold",
-                "Weight": "1 pound"
-            },
-            "Scriptures": {
-                "Description": "Religious texts for prayer and guidance.",
-                "Value": "10 Gold",
-                "Weight": "2 pounds"
-            }
+        "Leather": {
+            "Description": "Light leather armor for additional protection.",
+            "Weight": "10 pounds",
+            "Value": "10 Gold",
+            "AC": "11 + Dex Modifier"
+        },
+        "Holy Symbol": {
+            "Description": "A symbol representing the cleric's deity.",
+            "Value": "15 Gold",
+            "Weight": "1 pound"
+        },
+        "Scriptures": {
+            "Description": "Religious texts for prayer and guidance.",
+            "Value": "10 Gold",
+            "Weight": "2 pounds"
         }
     },
 
     "Wizard_items": {
-        "Weapons": {
-            "Magic Focus": {
-                "Description": "An object used to channel magical energy.",
-                "Weight": "1 pound",
-                "Value": "30 Gold",
-                "Damage": "Varies by spell"
-            }
+        "Magic Focus": {
+            "Description": "An object used to channel magical energy.",
+            "Weight": "1 pound",
+            "Value": "30 Gold",
+            "Damage": "Varies by spell"
         },
-        "Armor": {
-            "Leather": {
-                "Description": "Light armor providing minimal protection.",
-                "Weight": "10 pounds",
-                "Value": "10 Gold",
-                "AC": "11 + Dex Modifier"
-            }
+        "Leather": {
+            "Description": "Light armor providing minimal protection.",
+            "Weight": "10 pounds",
+            "Value": "10 Gold",
+            "AC": "11 + Dex Modifier"
         },
-        "Other Items": {
-            "Textbooks": {
-                "Description": "Books full of spells, theories, and magical research.",
-                "Value": "50 Gold",
-                "Weight": "10 pounds"
-            },
-            "Really Cool Hat": {
-                "Description": "A really tall wizard’s hat with stars and stuff on it.",
-                "Value": "Undetermined",
-                "Weight": "1 pound"
-            }
+        "Textbooks": {
+            "Description": "Books full of spells, theories, and magical research.",
+            "Value": "50 Gold",
+            "Weight": "10 pounds"
+        },
+        "Really Cool Hat": {
+            "Description": "A really tall wizard’s hat with stars and stuff on it.",
+            "Value": "Undetermined",
+            "Weight": "1 pound"
         }
     },
 
     "Bard_items": {
-        "Weapons": {
-            "Instrument": {
-                "Description": "A musical instrument used for performance and magic.",
-                "Weight": "3 pounds",
-                "Value": "25 Gold",
-                "Damage": "1d4"
-            }
+        "Instrument": {
+            "Description": "A musical instrument used for performance and magic.",
+            "Weight": "3 pounds",
+            "Value": "25 Gold",
+            "Damage": "1d4"
         },
-        "Armor": {
-            "Leather": {
-                "Description": "Light armor providing minimal protection.",
-                "Weight": "10 pounds",
-                "Value": "10 Gold",
-                "AC": "11 + Dex Modifier"
-            },
-            "Chainmail": {
-                "Description": "Interlocked metal rings providing solid protection.",
-                "Weight": "20 pounds",
-                "Value": "75 Gold",
-                "AC": "16"
-            }
+        "Leather": {
+            "Description": "Light armor providing minimal protection.",
+            "Weight": "10 pounds",
+            "Value": "10 Gold",
+            "AC": "11 + Dex Modifier"
         },
-        "Other Items": {
-            "Notepad": {
-                "Description": "A book to jot down lyrics, stories, or magical notes.",
-                "Value": "2 Gold",
-                "Weight": "1 pound"
-            },
-            "Tuning Fork": {
-                "Description": "A tuning fork for the bard’s instrument.",
-                "Value": "5 Gold",
-                "Weight": "1 pound"
-            }
+        "Chainmail": {
+            "Description": "Interlocked metal rings providing solid protection.",
+            "Weight": "20 pounds",
+            "Value": "75 Gold",
+            "AC": "16"
+        },
+        "Notepad": {
+            "Description": "A book to jot down lyrics, stories, or magical notes.",
+            "Value": "2 Gold",
+            "Weight": "1 pound"
+        },
+        "Tuning Fork": {
+            "Description": "A tuning fork for the bard’s instrument.",
+            "Value": "5 Gold",
+            "Weight": "1 pound"
         }
     },
 
@@ -257,16 +221,17 @@ items = {
     }
 }
 
+
 def available_items(characters, character_name, items):
     available_items = {}
-    character_class = str(characters[character_name]["Class"])
+    character_class = characters[character_name]["Class"]
     # Add general items
     for key in items["General_Items"].keys():
         available_items[key] = items["General_Items"][key]
 
     # Add class-specific items
     match character_class:
-        case "Rouge":
+        case "Rogue":
             for key in items["Rouge_items"].keys():
                 available_items[key] = items["Rouge_items"][key]
 
@@ -296,14 +261,14 @@ def available_items(characters, character_name, items):
 def inspect_inventory(characters,items, character_name):
     inventory = characters[character_name]["Inventory"]
     for k,v in inventory.items():
-            print(f"{k}:{v}")
+            print(f"{k}: {v["Description"]}")
     while True:
-        change = input("Would you like to add or remove items from your inventory? Y/N: ").strip().capitalize()
+        change = input("Would you like to add or remove items from your inventory, or inspect a specific item? Y/N: ").strip().capitalize()
         if change == "Y":
             while True:
-                add_remove = input("Are you adding or removing something from the inventory? Add/Remove: ").strip().capitalize()
+                inventory_function = input("Are you adding, removing, or inspecting something? Add/Remove/Inspect: ").strip().capitalize()
                 
-                if add_remove == "Add":
+                if inventory_function == "Add":
                     available_items_list = available_items(characters, character_name, items)
                     
                     for i in inventory.keys():
@@ -324,7 +289,7 @@ def inspect_inventory(characters,items, character_name):
                         inventory[item_to_add] = available_items_list[item_to_add]
                     break  
                 
-                elif add_remove == "Remove":
+                elif inventory_function == "Remove":
                     if len(inventory) == 0:
                         print("You have nothing in your inventory to remove. Add something to it first.")
                         break
@@ -338,17 +303,33 @@ def inspect_inventory(characters,items, character_name):
                     if check == "Y":
                         inventory.pop(item_to_remove)
                     break  
-                
+                elif inventory_function == "Inspect":
+                    while True:
+                        item = input("Which item would you like to inspect? Enter name exactly as seen in the list.")
+                        if item not in inventory:
+                            print("Please enter an item in the inventory.")
+                        else:
+                            print_indict_dictionaries(characters,character_name,item,type="Item")
                 else:
                     print("Please enter 'Add' or 'Remove'.")
                     continue
+                
         
         elif change == "N":
             break
         
         else:
             print("Please enter 'Y' or 'N'.")
-        return inventory
+            continue
+
+        go_again = input("Would you like to continue with inventory inspection? Y/N:\n")
+        if go_again == "Y":
+            continue
+        else:
+            break
+
+        
+    return inventory
 
 
 
