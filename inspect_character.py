@@ -259,13 +259,13 @@ items = {
 
 def available_items(characters, character_name, items):
     available_items = {}
-
+    character_class = str(characters[character_name]["Class"])
     # Add general items
     for key in items["General_Items"].keys():
         available_items[key] = items["General_Items"][key]
 
     # Add class-specific items
-    match characters[character_name]["Class"]:
+    match character_class:
         case "Rouge":
             for key in items["Rouge_items"].keys():
                 available_items[key] = items["Rouge_items"][key]
@@ -365,7 +365,7 @@ def character_inspect_menu(characters):
                 inspect_type = input(f"Do you want to inspect {character_name}'s inventory, attributes, skills, or race and class? Enter number:\n1. Inventory\n2. Attributes\n3. Skills\n4. Race and Class\n5. Return to main menu\nEnter here:\n")
                 match inspect_type:
                     case "1":
-                        inventory = inspect_inventory(characters, character_name, items)
+                        inventory = inspect_inventory(characters, items, character_name)
                         characters[character_name]["Inventory"] = inventory
                     case "2":
                         attribute_inspect(characters,character_name)
