@@ -111,7 +111,7 @@ def character_inspect_menu(characters):
                         case "4":
                             manage_inspect(characters,character_name)
                         case "5":
-                            break
+                            return
                         case _:
                             print("Please enter 1, 2, 3, 4, or 5 as your answer.")
                             continue

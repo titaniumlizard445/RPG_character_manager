@@ -319,10 +319,10 @@ items = {
         }
     }
 }
-species_list = ["Human (+2 to Consitution)","Elf (+2 to Wisdom)","Dwarf (+2 to Strength)","Gnome (+2 to Intelligence)","Dragonborn (+2 to Dexterity)","Halfling (+2 to Charisma)"]
-actual_species_list = ["Human","Elf","Dwarf","Gnome","Dragonborn","Halfling"]
-stats_list = ["Strength","Dexterity","Constitution","Wisdom","Intelligence","Charisma"]
-classes_list = ['Bard','Barbarian','Rogue','Cleric','Fighter','Wizard']
+species_list = ("Human (+2 to Consitution)","Elf (+2 to Wisdom)","Dwarf (+2 to Strength)","Gnome (+2 to Intelligence)","Dragonborn (+2 to Dexterity)","Halfling (+2 to Charisma)")
+actual_species_list = ("Human","Elf","Dwarf","Gnome","Dragonborn","Halfling")
+stats_list = ("Strength","Dexterity","Constitution","Wisdom","Intelligence","Charisma")
+classes_list = ('Bard','Barbarian','Rogue','Cleric','Fighter','Wizard')
 
 def available_items(characters, character_name, items):
     available_items = {}
@@ -367,6 +367,7 @@ def create_inventory(character_name,items):
             if i in available_items_list.keys():
                 available_items_list.pop(i)
         while True:
+            print("Available Items:")
             for i in available_items_list:
                 print(i)
             
@@ -381,6 +382,8 @@ def create_inventory(character_name,items):
                     break
                 else:
                     continue
+
+    return inventory
 
 def create_character(species_list,classes_list,characters): 
     new_stats = {"Strength":0,"Dexterity":0,"Constitution":0,"Wisdom":0,"Intelligence":0,"Charisma":0}
@@ -483,10 +486,13 @@ def level_up(characters,character_name):
     while True:
         choice = input("Would like to to gain +1 to a stat or gain a new skill? Skill/Stat: ").strip().capitalize()
         if choice == "Skill":
-            class_choice = characters[character_name]["Class"]
+            class_choice = characters[character_name]["Class"][0]
             level = characters[character_name]["Level"]
             available_skills = skills_available(level,character_class = class_choice)
-            skill_choice(available_skills,characters,character_name,amount_of_skills=1)
+            new_skills = skill_choice(available_skills,characters,character_name,amount_of_skills=1)
+            for i in new_skills:
+                characters[character_name]["Skills"].add(i)
+            return
         elif choice == "Stat":
             while True:
                 for k in characters[character_name]["Stats"].keys():
@@ -538,6 +544,7 @@ def level_up(characters,character_name):
                     case _:
                         print("Invalid answer")
                         continue
+                return
 
 def manage_inspect(characters,character_name):
     while True:

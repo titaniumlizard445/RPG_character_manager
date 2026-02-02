@@ -76,6 +76,7 @@ def print_indict_dictionaries(characters, character_name,type):
             print(i)
     elif type == "Inventory":
         print(f"{character_name}'s Inventory")
+        print(characters[character_name]["Inventory"])
         for ke,va in characters[character_name]["Inventory"].items():
             print(f"{ke}:\nDescription: {va["Description"]}\nValue: {va["Value"]}\nWeight: {va["Weight"]}\n")
    
@@ -115,7 +116,7 @@ def search_character(characters):
 
     for i in characters_found:
         print("Characters Found")
-        print(f"{i}, Level {characters[i]['Level']} {characters[i]['Race']} {characters[i]['Class']}")
+        print(f"{i}, Level {characters[i]['Level']} {characters[i]['Race'][0]} {characters[i]['Class'][0]}")
 
 
 def character_comparison(characters):

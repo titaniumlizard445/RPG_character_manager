@@ -1,7 +1,7 @@
 #Isaac Covington CP2 Skill Management
 
 
-import random
+from UI_liam import print_indict_dictionaries
 
 general_skills = {'Athletics','Acrobatics','Slight of Hand','Stealth','Arcana','History','Investigation','Relegion','Nature','Animal Handling','Insight','Perception','Survival','Deception','Intimidation','Performance','Persausion'}
 
@@ -108,10 +108,8 @@ def skills_available(level,character_class):
 def skill_choice(available_skills,characters,character_name,amount_of_skills):
     print("Available Skills")
     new_skills = set()
-    for a in characters[character_name]["Skills"]:
-            for b in available_skills:
-                if a == b:
-                    available_skills.remove(b)
+    print("Current Skills:")
+    print_indict_dictionaries(characters,character_name,type="Skills")
     for i in available_skills:
         print(i)
     for _ in range(amount_of_skills):
