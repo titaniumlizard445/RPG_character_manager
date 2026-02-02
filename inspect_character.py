@@ -41,6 +41,7 @@ def inspect_inventory(characters,items, character_name):
                             print(i)
                     
                     item_to_add = input("What item would you like to add? Make sure to enter the name exactly as it is in the list.\nEnter here:  ")
+                    
                     check = input(f"Are you sure you want to add {item_to_add} to your inventory? Y/N: ").strip().capitalize()
                     
                     if check == "Y":
@@ -56,12 +57,14 @@ def inspect_inventory(characters,items, character_name):
                             print(i)
                     
                     item_to_remove = input("What item would you like to remove? Enter the name exactly as it is seen on the list.\nEnter here:  ")
+                    
                     check = input(f"Are you sure you want to remove {item_to_remove} from your inventory? Y/N: ").strip().capitalize()
                     
                     if check == "Y":
                         inventory.pop(item_to_remove)
                     break  
                 else:
+                    
                     print("Please enter 'Add' or 'Remove'.")
                     continue
                 
@@ -70,6 +73,7 @@ def inspect_inventory(characters,items, character_name):
             break
         
         else:
+            
             print("Please enter 'Y' or 'N'.")
             continue
 
@@ -85,6 +89,7 @@ def inspect_inventory(characters,items, character_name):
 
 
 def character_inspect_menu(characters):
+    
     print("Character Names")
     if bool(characters) == False:
         print("You have no characters currently.")

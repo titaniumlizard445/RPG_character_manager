@@ -26,6 +26,7 @@ def main_menu():
             case "6":
                 check = input("Are you sure you want to exit? Your characters will not be saved. Y/N: ").strip().capitalize()
                 if check == "Y":
+                    
                     print("Goodbye!")
                     break
                 else:

@@ -93,6 +93,7 @@ def search_character(characters):
     search_type = input("Search by Name, Class, or Level: ")
 
     if search_type == "Name":
+        
         print("Names:")
         for i in character_names:
             print(i)
@@ -101,6 +102,7 @@ def search_character(characters):
             characters_found.append(name)
 
     elif search_type == "Class":
+        
         print("Classes")
         print("Rouge\nFighter\nBarbarian\nCleric\nWizard\nBard")
         class_name = input("Enter class: \n")
@@ -109,12 +111,14 @@ def search_character(characters):
                 characters_found.append(character_names[i])
 
     elif search_type == "Level":
+        
         level = input("Enter level (1-20) (Note: only characters of this exact level will show up.): ")
         for i in range(amount_of_characters):
             if level == str(characters[character_names[i]]["Level"]):
                 characters_found.append(character_names[i])
 
     for i in characters_found:
+        
         print("Characters Found")
         print(f"{i}, Level {characters[i]['Level']} {characters[i]['Race'][0]} {characters[i]['Class'][0]}")
 
@@ -124,35 +128,46 @@ def character_comparison(characters):
         print("You need at least two character to be able to compare them.")
         return
     print("Character Names")
+    
     count = 0
     for i in characters.keys():
         count += 1
         print(f"{count}. {i}")
 
     while True:
+        
         character_one = input("Enter first character to compare; Name must be entered exactly as seen on list.\nEnter here: ")
         if character_one not in list(characters.keys()):
+            
             print("Invalid answer")
             continue
         else:
             break
 
     while True:
-        character_two = input("Enter second character to compare; Name must also be entered exactly as seen on list.")
+        
+        character_two = input("Enter second character to compare; Name must also be entered exactly as seen on list: ")
         if character_two not in list(characters.keys()):
+            
             print("Invalid answer")
             continue
         else:
             break
 
     print(f"{character_one}'s Attributes")
+    
     print_indict_dictionaries(characters, character_name=character_one, type="Stats")
+    
     print(f"{character_one}'s Skills")
+    
     print_indict_dictionaries(characters, character_name=character_one, type="Skills")
 
     print(f"{character_two}'s Attributes")
+    
     print_indict_dictionaries(characters, character_name=character_two, type="Stats")
+    
     print(f"{character_two}'s Skills")
+    
     print_indict_dictionaries(characters, character_name=character_two, type="Skills")
 
 
