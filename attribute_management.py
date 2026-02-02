@@ -48,6 +48,7 @@ def stat_change(characters,character_name,stat):
       check = input(f"Are you sure you want to set {stat} to {new_stat}? Y/N: ").strip().capitalize()
       if check == "Y":
         characters[character_name]["Stats"][stat] = int(new_stat)
+        break
       else:
         continue
 
@@ -66,16 +67,22 @@ def attribute_inspect(characters,character_name):
       match stat_to_change:
         case "1":
           stat_change(characters,character_name,stat = "Strength")
+          break
         case "2":
           stat_change(characters,character_name,stat = "Dexterity")
+          break
         case "3":
           stat_change(characters,character_name,stat = "Constitution")
+          break
         case "4":
           stat_change(characters,character_name,stat = "Intelligence")
+          break
         case "5":
           stat_change(characters,character_name,stat = "Wisdom")
+          break
         case "6":
           stat_change(characters,character_name,stat = "Charisma")
+          break
         case _:
           
           print("Please enter one of the displayed options. 1, 2, 3, 4, 5, or 6.")
