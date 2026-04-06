@@ -3,7 +3,7 @@
 
 #
 from character_managment import characters
-from UI_liam import print_indict_dictionaries
+from UI_NOT_liam import print_indict_dictionaries
 import utill_functions
 
 #function called attribute_manager(character dictionary, character chosen)

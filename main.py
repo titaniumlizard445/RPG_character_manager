@@ -1,6 +1,6 @@
 #PS main file for character manager
 from character_managment import create_character,characters
-from UI_liam import character_comparison, search_character, user_help
+from UI_NOT_liam import character_comparison, search_character, user_help
 from inspect_character import character_inspect_menu
 
 
@@ -15,7 +15,7 @@ def main_menu():
             case "1":
                 create_character(species_list,classes,characters)
             case "2":
-                character_inspect_menu(characters)
+                character_inspect_menu(characters,species_list,classes)
                 pass
             case "3":
                 search_character(characters)

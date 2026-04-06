@@ -5,7 +5,8 @@
 #import attribute manager
 from attribute_management import attribute_inspect
 from character_managment import manage_inspect,characters,available_items,items
-from UI_liam import print_indict_dictionaries
+from UI_NOT_liam import print_indict_dictionaries
+import utill_functions
 #function for inventory changer (character chosen, character dictionary)
 
 
@@ -21,52 +22,41 @@ def inspect_inventory(characters,items, character_name):
     inventory = characters[character_name]["Inventory"]
     print_indict_dictionaries(characters,character_name,type="Inventory")
     while True:
-        change = input("Would you like to add or remove items from your inventory? Y/N:\n ").strip().capitalize()
-        if change == "Y":
-            while True:
-                inventory_function = input("Are you adding or removing something? Add/Remove:\n").strip().capitalize()
-                
-                if inventory_function == "Add":
-                    available_items_list = available_items(characters, character_name, items)
-                    
-                    for i in inventory.keys():
-                        if i in available_items_list.keys():
-                            available_items_list.pop(i)
-                    
-                    if len(inventory) == 7:
-                        print("Your inventory is at max capacity. You first need to remove something.")
-                        continue
-                    else:
-                        for i in available_items_list:
-                            print(i)
-                    
-                    item_to_add = input("What item would you like to add? Make sure to enter the name exactly as it is in the list.\nEnter here:  ")
-                    
-                    check = input(f"Are you sure you want to add {item_to_add} to your inventory? Y/N: ").strip().capitalize()
-                    
-                    if check == "Y":
-                        inventory[item_to_add] = available_items_list[item_to_add]
-                    break  
-                
-                elif inventory_function == "Remove":
-                    if len(inventory) == 0:
-                        print("You have nothing in your inventory to remove. Add something to it first.")
-                        break
-                    else:
-                        for i in inventory:
-                            print(i)
-                    
-                    item_to_remove = input("What item would you like to remove? Enter the name exactly as it is seen on the list.\nEnter here:  ")
-                    
-                    check = input(f"Are you sure you want to remove {item_to_remove} from your inventory? Y/N: ").strip().capitalize()
-                    
-                    if check == "Y":
-                        inventory.pop(item_to_remove)
-                    break  
-                else:
-                    
-                    print("Please enter 'Add' or 'Remove'.")
-                    continue
+        choise=utill_functions.get_valid_type(int,"0 to return\n1 to add something to your invintory\n2 to remove something from your inventory: ",valid=(0,2))
+        if choise == "1":
+            available_items_list = available_items()
+            print("0 to return")
+            for num,i in enumerate(available_items_list):
+                print(f"{num+1} for {i}")
+            try:
+                item_to_add = available_items_list[]
+            except:
+                break
+            check = input(f"Are you sure you want to add {item_to_add} to your inventory? Y/N: ").strip().capitalize()
+            
+            if check == "Y":
+                inventory[item_to_add] = available_items_list[item_to_add]
+            break  
+        
+        elif inventory_function == "Remove":
+            if len(inventory) == 0:
+                print("You have nothing in your inventory to remove. Add something to it first.")
+                break
+            else:
+                for i in inventory:
+                    print(i)
+            
+            item_to_remove = input("What item would you like to remove? Enter the name exactly as it is seen on the list.\nEnter here:  ")
+            
+            check = input(f"Are you sure you want to remove {item_to_remove} from your inventory? Y/N: ").strip().capitalize()
+            
+            if check == "Y":
+                inventory.pop(item_to_remove)
+            break  
+        else:
+            
+            print("Please enter 'Add' or 'Remove'.")
+            continue
                 
         
         elif change == "N":

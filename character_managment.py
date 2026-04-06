@@ -108,9 +108,12 @@ def create_inventory(character_name,items):
             print("Available Items:")
             print("0 to return")
             for num,i in enumerate(available_items_list):
-                print(f"{num} for {i}")
+                print(f"{num+1} for {i}")
                 maxi=num
-            item_to_add = available_items_list[utill_functions.get_valid_type("What do you want: ",valid=(0,maxi))]
+            try:
+                item_to_add = available_items_list[utill_functions.get_valid_type("What do you want: ",valid=(0,maxi))-1]
+            except:
+                return
             check = utill_functions.get_valid_type(str,"Would you like to add that item? (y/n): ",valid=["y","n"])
             if check == "y":
                 inventory[item_to_add] = available_items_list[item_to_add]
@@ -126,13 +129,14 @@ def create_character(species_list,classes_list,characters):
     if utill_functions.get_valid_type(str,"do you want a random character (y/n): ",valid=["y","n"])=="y":
         character=update_base.RandomGenerator.random_character()
         characters[character["name"]]={}
-        characters[character["name"]]["race"]=character["race"]
+        characters[character]["Level"] = 1
+        characters[character["name"]]["race"]=tuple(character["race"])
         characters[character["name"]]["stats"]=character["stats"]
         characters[character["name"]]["description"]=character["description"]
         characters[character["name"]]["origin"]=character["origin"]
-        characters[character["name"]]["class"]=character["class"]
+        characters[character["name"]]["class"]=tuple(character["class"])
         characters[character["name"]]["story"]=character["story"]
-
+        characters[character["name"]]=available_items()
     while True:
         
         character_name = utill_functions.get_valid_type(str,"What is the name of your character: ")
@@ -156,71 +160,45 @@ def create_character(species_list,classes_list,characters):
         if check == "y":
             race = tuple([race])
             characters[character_name]["Race"] = race
-            match race:
-                case "Human":
-                    new_stats["Constitution"] += 2
-                case "Elf":
-                    new_stats["Wisdom"] += 2
-                case "Dwarf":
-                    new_stats["Strength"] += 2
-                case "Gnome":
-                    new_stats["Intelligence"] += 2
-                case "Dragonborn":
-                    new_stats["Dexterity"] += 2
-                case "Halfling":
-                    new_stats["Charisma"] += 2
             break
-        else:
-            continue
     while True:
         for i in stats_list:
             while True:
                 
-                stat = input(f"What do you want your base stat for {i} to be?")
-                if stat.isnumeric() == False:
+                final_stat = utill_functions.get_valid_type(int,f"What is your {i}: ",valid=(0,30))
                     
-                    print("Invalid answer")
-                    continue
+                check = utill_functions.get_valid_type(str,f"{i}: {final_stat}:\nis this what you want (y/n): ",valid=["y"","n])
+                if check=="y":
+                    new_stats[i] = final_stat
+                    break
                 else:
-                    stat = int(stat)
-                    final_stat = new_stats[i] + stat
-                    if final_stat > 20:
-                        
-                        print("That would make the stat go over 20. Please enter a lower number.")
-                        continue
-                    else:
-                        
-                        check = input(f"{i}: {final_stat}. Are you sure this is what you want? Y/N: ").strip().capitalize()
-                        if check == "Y":
-                            new_stats[i] = final_stat
-                            break
-                        else:
-                            continue
+                    continue
         characters[character_name]["Stats"] = new_stats
         break   
     print("Available Classes:")
-    for i in classes_list:
-        print(i)
+    for num,i in enumerate(classes_list):
+        print(f"{num+1} for {i}")
+        maxi=num
     while True:
         
-        class_choice = input("What class do you want to take?\nEnter here: ").strip().capitalize()
-        if class_choice not in classes_list:
-            print("Invalid answer")
+        class_choice =classes_list[utill_functions.get_valid_type(int,"what class do you want: ",valid=(1,maxi))-1]    
+        check = utill_functions.get_valid_type(str,f"do you want {class_choice} to be your class(y/n): ",valid=["y","n"])
+        if check == "y":
+            class_choice = tuple([class_choice])
+            characters[character_name]["Class"] = class_choice
+            break
         else:
-            
-            check = input(f"Are you sure you want to take {class_choice} as your class? Y/N: ").strip().capitalize()
-            if check == "Y":
-                class_choice = tuple([class_choice])
-                characters[character_name]["Class"] = class_choice
-                break
-            else:
-                continue
+            continue
     
     while True:
-        inventory = create_inventory(character_name,)
+        inventory = create_inventory(character_name)
         characters[character_name]["Inventory"] = inventory
         break
-    
+    story=utill_functions.get_valid_type(str,"what is your characters story (you can always change this later): \n")
+    characters[character_name]["story"]=story
+    characters[character_name]["description"]=utill_functions.get_valid_type(str,"what is the description of your character: ")
+    characters[character_name]["origin"]=utill_functions.get_valid_type(str,"what is the origin of your character: ")
+
     print("Character Creation Finished!")
     return
 
@@ -228,51 +206,53 @@ def create_character(species_list,classes_list,characters):
 def level_up(characters,character_name):
     characters[character_name]["level"]=utill_functions.get_valid_type(int,"what is your new level: ",valid=(1,20))
     return
-def manage_inspect(characters,character_name):
+def manage_inspect(characters,character_name,races,classes):
     while True:
-        print(f"Name: {character_name}\nRace: {str(characters[character_name]["Race"][0])}\nClass: {str(characters[character_name]["Class"][0])}\nLevel: {characters[character_name]["Level"]}")
-        change = input("Would you like to edit the Name or Level of your character? Y/N: ").strip().capitalize()
-        if change == "N":
-            break
-        elif change == "Y":
-            
-            item_to_change = input("Name or Level?\nEnter here: ").strip().capitalize()
-            if item_to_change == "Name":
-                while True:
-                    
-                    new_name = input("Enter the new name of your character: ")
-                    
-                    check = input(f"Are you sure you want {new_name} to tbe the name of your character? Y/N: ").strip().capitalize()
-                    if check == "Y":
-                        characters[new_name] = characters[character_name].pop()
-                        character_name = new_name
-                    else:
-                        continue
-            elif item_to_change == "Level":
-                while True:
-                    
-                    print(f"Current Level: {characters[character_name]["Level"]}")
-                    
-                    new_level = input("What do you want to change your level to? It can only be increased. Type 'Exit' to go back to the inspect menu.\nEnter here: ").strip().capitalize()
-                    if new_level == "Exit":
-                        return character_name
-                    elif new_level.isnumeric() is False or int(new_level) > 20 or int(new_level) < characters[character_name]["Level"]:
-                        print("Please enter a valid answer.")
-                        continue
-                    else:
-                        
-                        check = input(f"Are you sure you want to set your character's level to {new_level}? Y/N: ").strip().capitalize()
-                        if check == "Y":
-                            old_level = characters[character_name]["Level"]
-                            new_level = int(new_level)
-                            characters[character_name]["Level"] = new_level
-                            for _ in range(new_level - old_level):
-                                level_up(characters,character_name)
-                            break
-                        else:
-                            continue
+        print(f"Name: {character_name}\nRace: {str(characters[character_name]["Race"][0])}\nClass: {str(characters[character_name]["Class"][0])}\nLevel: {characters[character_name]["Level"]}\ndescription:{characters[character_name]["description"]}\norigin:{characters[character_name]["origin"]}\n{characters[character_name]["story"]}")
+        choise=utill_functions.get_valid_type(int,"0 to return\n1 to change name\n2 to change race\n3 to change description\n4 to change origin\n5 to change class\n6 to change story\n7 to change level: ")
+        if choise==0:
+            return
+        elif choise==1:    
+            new_name = utill_functions.get_valid_type(str,"Enter the new name for your character: ")  
+            check = utill_functions.get_valid_type(f"Are you sure you want {new_name} to be the name of your character(y/n): ",valid={"y","n"})
+            if check == "y":
+                characters[new_name] = characters[character_name].pop()
+                character_name = new_name
             else:
-                
-                print("Please enter 'Name' or 'Level'.")
                 continue
-                    
+        elif choise==2:
+            while True:
+                print("0 to return")
+                for num,x in enumerate(races):
+                    print(f"{num+1} for {x}")
+                    maxi=num
+                try:
+                    race=races[utill_functions.get_valid_type(int,"what do you want: ",valid=(0,maxi))-1]
+                    if utill_functions.get_valid_type(str,f"do you want {race} to be your new race(y/n): ",valid=["y","n"])=="y":
+                        characters[character_name]["race"]=race
+                        break
+                except:
+                    break
+        elif choise==3:
+            characters[character_name]["description"]=utill_functions.get_valid_type(str,"what is the new description of your character: ")
+        elif choise==4:
+            characters[character_name]["origin"]=utill_functions.get_valid_type(str,"what is the new origin of your character: ")
+
+        elif choise==5:
+            while True:
+                print("0 to return")
+                for num,x in enumerate(classes):
+                    print(f"{num+1} for {x}")
+                    maxi=num
+                try:
+                    classs=classes[utill_functions.get_valid_type(int,"what do you want: ",valid=(0,maxi))-1]
+                    if utill_functions.get_valid_type(str,f"do you want {classs} to be your new class(y/n): ",valid=["y","n"])=="y":
+                        characters[character_name]["class"]=classs
+                        break
+                except:
+                    break
+        elif choise==6:
+            characters[character_name]["story"]=utill_functions.get_valid_type(str,"what is the new story of your character: \n")
+        elif choise == 7:
+            level_up(characters,character_name)
+                
