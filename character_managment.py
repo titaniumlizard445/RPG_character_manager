@@ -127,8 +127,15 @@ def create_character(species_list,classes_list,characters):
     stats_list=['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma']
     if utill_functions.get_valid_type(str,"do you want a random character (y/n): ",valid=["y","n"])=="y":
         character=update_base.RandomGenerator.random_character()
-        characters[character_name]=character["name"]
-        characters[]
+        characters[character["name"]]={}
+        characters[character["name"]]["race"]=character["race"]
+        characters[character["name"]]["stats"]=character["stats"]
+        characters[character["name"]]["description"]=character["description"]
+        characters[character["name"]]["origin"]=character["origin"]
+        characters[character["name"]]["class"]=character["class"]
+        characters[character["name"]]["story"]=character["story"]
+        character
+        {'name': {'Level': 1, 'Race': (...), 'Stats': {...}, 'Class': (...), 'Skills': {...}, 'Inventory': {...}}}
     while True:
         
         character_name = utill_functions.get_valid_type(str,"What is the name of your character: ")
