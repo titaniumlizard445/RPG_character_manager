@@ -87,278 +87,18 @@
 from skills import skills_available,skill_choice
 
 
-
+import faker, random,utill_functions,update_base
 characters = {
     
 }
-
-items = {
-    "Rogue_items": {
-        "Daggers": {
-            "Description": "A pair of daggers that deal 1d4 damage.",
-            "Weight": "2 pounds",
-            "Value": "5 Gold pieces"
-        },
-        "Rapier": {
-            "Description": "An old European sword with a thin, fast blade that deals 1d8 damage.",
-            "Weight": "3 pounds",
-            "Value": "25 Gold pieces"
-        },
-        "Leather Armor": {
-            "Description": "Basic leather armor that provides an AC of 11 + Dex Modifier.",
-            "Weight": "10 pounds",
-            "Value": "10 Gold"
-        },
-        "Lockpicks": {
-            "Description": "A set of lockpicks that can unlock many doors, if you have the skill.",
-            "Value": "2 Gold",
-            "Weight": "½ pound"
-        },
-        "Fake ID": {
-            "Description": "A fake ID that can get you many places you shouldn’t be.",
-            "Value": "Varies",
-            "Weight": "Insignificant"
-        }
-    },
-
-    "Fighter_items": {
-        "Greatsword": {
-            "Description": "A large two-handed sword ideal for heavy attacks, dealing 2d6 damage.",
-            "Weight": "6 pounds",
-            "Value": "50 Gold pieces"
-        },
-        "Poleaxe": {
-            "Description": "A versatile weapon with an axe blade, hammer, and spike that deals 1d10 damage.",
-            "Weight": "7 pounds",
-            "Value": "40 Gold pieces"
-        },
-        "Chainmail": {
-            "Description": "Interlocked metal rings providing solid protection with an AC of 16.",
-            "Weight": "20 pounds",
-            "Value": "75 Gold"
-        },
-        "Full Plate": {
-            "Description": "Heavy plate armor covering the entire body, providing an AC of 18.",
-            "Weight": "50 pounds",
-            "Value": "150 Gold"
-        },
-        "Military Insignia": {
-            "Description": "A symbol representing rank and affiliation.",
-            "Value": "10 Gold",
-            "Weight": "1 pound"
-        },
-        "Battle Trinket": {
-            "Description": "A personal charm carried into battle for luck.",
-            "Value": "5 Gold",
-            "Weight": "Negligible"
-        }
-    },
-
-    "Barbarian_items": {
-        "Warhammer": {
-            "Description": "A heavy hammer designed for crushing armor, dealing 1d8 damage.",
-            "Weight": "5 pounds",
-            "Value": "30 Gold"
-        },
-        "Greataxe": {
-            "Description": "A massive axe for devastating swings that deals 1d12 damage.",
-            "Weight": "7 pounds",
-            "Value": "35 Gold"
-        },
-        "Chainmail": {
-            "Description": "Interlocked metal rings providing solid protection with an AC of 16.",
-            "Weight": "20 pounds",
-            "Value": "75 Gold"
-        },
-        "Stress Toy": {
-            "Description": "Something to make sure the barbarian doesn’t rage during a fine(ish) dinner, or any other situation.",
-            "Value": "1 Gold",
-            "Weight": "Negligible"
-        },
-        "Unidentified Blood Vial": {
-            "Description": "A vial of blood that the barbarian won’t say where or what it’s from.",
-            "Value": "Unknown",
-            "Weight": "Negligible"
-        }
-    },
-
-    "Cleric_items": {
-        "Holy Staff": {
-            "Description": "A staff imbued with divine power that deals 1d6 damage.",
-            "Weight": "4 pounds",
-            "Value": "20 Gold"
-        },
-        "Robes": {
-            "Description": "Simple robes that offer minimal protection, providing an AC of 10.",
-            "Weight": "3 pounds",
-            "Value": "5 Gold"
-        },
-        "Leather": {
-            "Description": "Light leather armor for additional protection, providing an AC of 11 + Dex Modifier.",
-            "Weight": "10 pounds",
-            "Value": "10 Gold"
-        },
-        "Holy Symbol": {
-            "Description": "A symbol representing the cleric's deity.",
-            "Value": "15 Gold",
-            "Weight": "1 pound"
-        },
-        "Scriptures": {
-            "Description": "Religious texts for prayer and guidance.",
-            "Value": "10 Gold",
-            "Weight": "2 pounds"
-        }
-    },
-
-    "Wizard_items": {
-        "Magic Focus": {
-            "Description": "An object used to channel magical energy; damage varies by spell.",
-            "Weight": "1 pound",
-            "Value": "30 Gold"
-        },
-        "Leather": {
-            "Description": "Light armor providing minimal protection with an AC of 11 + Dex Modifier.",
-            "Weight": "10 pounds",
-            "Value": "10 Gold"
-        },
-        "Textbooks": {
-            "Description": "Books full of spells, theories, and magical research.",
-            "Value": "50 Gold",
-            "Weight": "10 pounds"
-        },
-        "Really Cool Hat": {
-            "Description": "A really tall wizard’s hat with stars and stuff on it.",
-            "Value": "Undetermined",
-            "Weight": "1 pound"
-        }
-    },
-
-    "Bard_items": {
-        "Instrument": {
-            "Description": "A musical instrument used for performance and magic that can deal 1d4 damage.",
-            "Weight": "3 pounds",
-            "Value": "25 Gold"
-        },
-        "Leather Armor": {
-            "Description": "Light armor providing minimal protection with an AC of 11 + Dex Modifier.",
-            "Weight": "10 pounds",
-            "Value": "10 Gold"
-        },
-        "Chainmail Armor": {
-            "Description": "Interlocked metal rings providing solid protection with an AC of 16.",
-            "Weight": "20 pounds",
-            "Value": "75 Gold"
-        },
-        "Notepad": {
-            "Description": "A book to jot down lyrics, stories, or magical notes.",
-            "Value": "2 Gold",
-            "Weight": "1 pound"
-        },
-        "Tuning Fork": {
-            "Description": "A tuning fork for the bard’s instrument.",
-            "Value": "5 Gold",
-            "Weight": "1 pound"
-        }
-    },
-
-    "General_Items": {
-        "Ropes": {
-            "Description": "Strong ropes for climbing or tying objects.",
-            "Value": "5 Gold",
-            "Weight": "5 pounds"
-        },
-        "Torches": {
-            "Description": "Standard torches for lighting dark areas.",
-            "Value": "1 Gold",
-            "Weight": "1 pound"
-        },
-        "First-aid kit": {
-            "Description": "Basic supplies for treating wounds.",
-            "Value": "10 Gold",
-            "Weight": "3 pounds"
-        },
-        "Potions": {
-            "Description": "Various potions for healing, mana, or temporary boosts.",
-            "Value": "Varies",
-            "Weight": "1 pound each"
-        },
-        "Bedroll": {
-            "Description": "A compact roll of bedding for resting outdoors.",
-            "Value": "2 Gold",
-            "Weight": "4 pounds"
-        },
-        "Rations": {
-            "Description": "Preserved food sufficient for one day.",
-            "Value": "1 Gold",
-            "Weight": "2 pounds"
-        },
-        "Waterskin": {
-            "Description": "A leather container used to carry drinking water.",
-            "Value": "1 Gold",
-            "Weight": "1 pound (full)"
-        },
-        "Backpack": {
-            "Description": "A sturdy pack for carrying equipment and supplies.",
-            "Value": "3 Gold",
-            "Weight": "2 pounds"
-        },
-        "Flint and Steel": {
-            "Description": "Tools used to start fires in the wilderness.",
-            "Value": "2 Gold",
-            "Weight": "1 pound"
-        },
-        "Lantern": {
-            "Description": "A reusable light source that burns oil for extended illumination.",
-            "Value": "7 Gold",
-            "Weight": "2 pounds"
-        },
-        "Oil Flask": {
-            "Description": "A small flask of oil used to fuel lanterns or start fires.",
-            "Value": "1 Gold",
-            "Weight": "1 pound"
-        }
-    }
-}
-species_list = ("Human (+2 to Consitution)","Elf (+2 to Wisdom)","Dwarf (+2 to Strength)","Gnome (+2 to Intelligence)","Dragonborn (+2 to Dexterity)","Halfling (+2 to Charisma)")
-actual_species_list = ("Human","Elf","Dwarf","Gnome","Dragonborn","Halfling")
-stats_list = ("Strength","Dexterity","Constitution","Wisdom","Intelligence","Charisma")
-classes_list = ('Bard','Barbarian','Rogue','Cleric','Fighter','Wizard')
-
-def available_items(characters, character_name, items):
-    available_items = {}
-    character_class = characters[character_name]["Class"]
-    # Add general items
-    for key in items["General_Items"].keys():
-        available_items[key] = items["General_Items"][key]
-
-    # Add class-specific items
-    match character_class[0]:
-        case "Rogue":
-            for key in items["Rogue_items"].keys():
-                available_items[key] = items["Rogue_items"][key]
-
-        case "Fighter":
-            for key in items["Fighter_items"].keys():
-                available_items[key] = items["Fighter_items"][key]
-
-        case "Barbarian":
-            for key in items["Barbarian_items"].keys():
-                available_items[key] = items["Barbarian_items"][key]
-
-        case "Cleric":
-            for key in items["Cleric_items"].keys():
-                available_items[key] = items["Cleric_items"][key]
-
-        case "Wizard":
-            for key in items["Wizard_items"].keys():
-                available_items[key] = items["Wizard_items"][key]
-
-        case "Bard":
-            for key in items["Bard_items"].keys():
-                available_items[key] = items["Bard_items"][key]
-
-    return available_items
-
+def available_items():
+    fake = faker()
+    stuff={}
+    for x in 15:
+        word=fake.word()
+        color=fake.color_name()
+        stuff[f"{color} {word}:"]={"Description": f"{color} {word} from {fake.city()}","Weight": f"{fake.random_int(min=1, max=100)} pounds","Value": f"{faker.random_int(min=1,max=100)} gold"}
+    return stuff
 def create_inventory(character_name,items):
     inventory = {}
     for _ in range(7):
@@ -368,31 +108,33 @@ def create_inventory(character_name,items):
                 available_items_list.pop(i)
         while True:
             print("Available Items:")
-            for i in available_items_list:
-                print(i)
-            
-            item_to_add = input("What item would you like to add? Make sure to enter the name exactly as it is in the list.\nEnter here:  ")
-            if item_to_add not in available_items_list:
-                print("Please enter an item that is in the list.")
+            print("0 to return")
+            for num,i in enumerate(available_items_list):
+                print(f"{num} for {i}")
+                maxi=num
+            item_to_add = available_items_list[utill_functions.get_valid_type("What do you want: ",valid=(0,maxi))]
+            check = utill_functions.get_valid_type(str,"Would you like to add that item? (y/n): ",valid=["y","n"])
+            if check == "y":
+                inventory[item_to_add] = available_items_list[item_to_add]
+                break
             else:
-                check = input(f"Are you sure you want to add {item_to_add} to your inventory? Y/N: ").strip().capitalize()
-                
-                if check == "Y":
-                    inventory[item_to_add] = available_items_list[item_to_add]
-                    break
-                else:
-                    continue
+                continue
 
     return inventory
 
 def create_character(species_list,classes_list,characters): 
     new_stats = {"Strength":0,"Dexterity":0,"Constitution":0,"Wisdom":0,"Intelligence":0,"Charisma":0}
+    stats_list=['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma']
+    if utill_functions.get_valid_type(str,"do you want a random character (y/n): ",valid=["y","n"])=="y":
+        character=update_base.RandomGenerator.random_character()
+        characters[character_name]=character["name"]
+        characters[]
     while True:
         
-        character_name = input("What will the name of your character be?\nEnter here: ").strip()
+        character_name = utill_functions.get_valid_type(str,"What is the name of your character: ")
         
-        check = input(f"Are you sure you want {character_name} to be your character's name? Y/N: ").strip().capitalize()
-        if check == "Y":
+        check = utill_functions.get_valid_type(str,f"do you want {character_name} to be your characters name (y/n): ",valid=["y","n"])
+        if check == "y":
             characters[character_name] = {}
             characters[character_name]["Level"] = 1
             level = 1
@@ -406,8 +148,7 @@ def create_character(species_list,classes_list,characters):
         for i in species_list:
             print(i)
         race = input("What will the race of your character be?\nEnter here (name):\n ").strip().capitalize()
-        if race not in actual_species_list:
-            
+        if race not in species_list:
             print("Invalid answer")
         else:
             

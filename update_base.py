@@ -10,7 +10,7 @@ from matplotlib.patches import RegularPolygon
 class data_visualisation:
     def __init__(self):
         self.figuer,self.axis=plt.subplots()
-    def radar_graph(self,catigorys,vals,radius=30,definition=):
+    def radar_graph(self,catigorys,vals,radius=30,definition=10):
         x_points = []
         y_points = []
         shape=RegularPolygon((0,0),numVertices=len(catigorys),radius=radius,facecolor="none",edgecolor="black",linewidth=1)
@@ -80,8 +80,18 @@ class RandomGenerator:
             "Changeling": ["Bin", "Cas", "Doppel", "Ael", "Bryn", "Cis", "Dax", "Eil", "Fay", "Glyn", "Hix","Iri", "Jax", "Kael", "Lux", "Mox", "Nix", "Ori", "Pax", "Quin", "Rix", "Sox","Trix", "Ur", "Vex", "Wox", "Xax", "Yix", "Zix", "Chance", "Mask"]
         }
     def random_character(self):
-        return {"race":self.dnd_races[random.randint(0,len(self.dnd_races)-1)]}
-        
-            
-test=data_visualisation()
-test.radar_graph(["bob","turtle","jeff","liam","dog"],[7,3,30,2,2])
+        race=self.dnd_races[random.randint(0,len(self.dnd_races)-1)]
+        name=self.dnd_names[race][random.randint(0,len(self.dnd_names[race])-1)]
+        descrip=self.race_flavor_descriptions[race][random.randint(0,len(self.race_flavor_descriptions[race]))]
+        oregen=self.dnd_origins[random.randint(0,len(self.dnd_origins)-1)]
+        classs=self.classes[random.randint(0,len(self.classes)-1)]
+        level=random.randint(1,20)
+        stats={"Strength":random.randint(1,30),"Dexterity":random.randint(1,30),"Constitution":random.randint(1,30),"Wisdom":random.randint(1,30),"Intelligence":random.randint(1,30),"Charisma":random.randint(1,30)}
+        return {"name":name,"race":race,"level":level,"stats":stats,"description":descrip,"origin":oregen,"class":classs,"story":f"{name}, a level {level} {race} {classs} who is {descrip} from {oregen}"}
+class StatisticalAnalyzer:
+    pass
+testr=RandomGenerator()     
+print(testr.dnd_stats)
+testd=data_visualisation()
+testd.radar_graph(["bob","turtle","jeff","liam","dog"],[7,3,30,2,2])
+print(testr.random_character())

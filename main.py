@@ -1,10 +1,11 @@
 #PS main file for character manager
-from character_managment import create_character,characters,species_list,classes_list
+from character_managment import create_character,characters
 from UI_liam import character_comparison, search_character, user_help
 from inspect_character import character_inspect_menu
 
 
-
+species_list=['Human', 'Elf', 'Dwarf', 'Halfling', 'Dragonborn', 'Gnome', 'Tiefling', 'Aasimar', 'Goliath', 'Orc', 'Tabaxi', 'Warforged', 'Genasi', 'Lizardfolk', 'Changeling']
+classes=['Artificer', 'Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard']
 def main_menu():
     print("This is an RPG character manager!")
     while True:
@@ -12,7 +13,7 @@ def main_menu():
         menu_choice = input("What would you like to do? Enter number:\n").strip()
         match menu_choice:
             case "1":
-                create_character(species_list,classes_list,characters)
+                create_character(species_list,classes,characters)
             case "2":
                 character_inspect_menu(characters)
                 pass
