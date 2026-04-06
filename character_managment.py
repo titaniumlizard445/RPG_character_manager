@@ -84,8 +84,6 @@
                     # run level_up() function
 
 
-from skills import skills_available,skill_choice
-
 
 import faker, random,utill_functions,update_base
 characters = {
@@ -134,8 +132,7 @@ def create_character(species_list,classes_list,characters):
         characters[character["name"]]["origin"]=character["origin"]
         characters[character["name"]]["class"]=character["class"]
         characters[character["name"]]["story"]=character["story"]
-        character
-        {'name': {'Level': 1, 'Race': (...), 'Stats': {...}, 'Class': (...), 'Skills': {...}, 'Inventory': {...}}}
+
     while True:
         
         character_name = utill_functions.get_valid_type(str,"What is the name of your character: ")
@@ -154,31 +151,27 @@ def create_character(species_list,classes_list,characters):
         print("Available Races")
         for i in species_list:
             print(i)
-        race = input("What will the race of your character be?\nEnter here (name):\n ").strip().capitalize()
-        if race not in species_list:
-            print("Invalid answer")
+        race = utill_functions.get_valid_type(str,"What is your race: "valid=species_list)
+        check = utill_functions.get_valid_type(f"Do you want {character_name} to be a {race} (y/n): ",valid=["y","n"])
+        if check == "y":
+            race = tuple([race])
+            characters[character_name]["Race"] = race
+            match race:
+                case "Human":
+                    new_stats["Constitution"] += 2
+                case "Elf":
+                    new_stats["Wisdom"] += 2
+                case "Dwarf":
+                    new_stats["Strength"] += 2
+                case "Gnome":
+                    new_stats["Intelligence"] += 2
+                case "Dragonborn":
+                    new_stats["Dexterity"] += 2
+                case "Halfling":
+                    new_stats["Charisma"] += 2
+            break
         else:
-            
-            check = input(f"Are you sure you want {character_name} to be a {race}? It cannot be changed later. Y/N: ").strip().capitalize()
-            if check == "Y":
-                race = tuple([race])
-                characters[character_name]["Race"] = race
-                match race:
-                    case "Human":
-                        new_stats["Constitution"] += 2
-                    case "Elf":
-                        new_stats["Wisdom"] += 2
-                    case "Dwarf":
-                        new_stats["Strength"] += 2
-                    case "Gnome":
-                        new_stats["Intelligence"] += 2
-                    case "Dragonborn":
-                        new_stats["Dexterity"] += 2
-                    case "Halfling":
-                        new_stats["Charisma"] += 2
-                break
-            else:
-                continue
+            continue
     while True:
         for i in stats_list:
             while True:
@@ -224,16 +217,7 @@ def create_character(species_list,classes_list,characters):
                 continue
     
     while True:
-        characters[character_name]["Skills"] = set()
-        class_choice = str(class_choice[0])
-        available_skills = skills_available(level,character_class = class_choice)
-        amount_of_skills = 2
-        new_skills = skill_choice(available_skills,characters,character_name,amount_of_skills)
-        for i in new_skills:
-            characters[character_name]["Skills"].add(i)
-        break
-    while True:
-        inventory = create_inventory(character_name,items)
+        inventory = create_inventory(character_name,)
         characters[character_name]["Inventory"] = inventory
         break
     
@@ -242,77 +226,8 @@ def create_character(species_list,classes_list,characters):
 
 
 def level_up(characters,character_name):
-    while True:
-        
-        choice = input("Would like to to gain +1 to a stat or gain a new skill? Skill/Stat: ").strip().capitalize()
-        if choice == "Skill":
-            class_choice = characters[character_name]["Class"][0]
-            level = characters[character_name]["Level"]
-            available_skills = skills_available(level,character_class = class_choice)
-            new_skills = skill_choice(available_skills,characters,character_name,amount_of_skills=1)
-            for i in new_skills:
-                characters[character_name]["Skills"].add(i)
-            return
-        elif choice == "Stat":
-            while True:
-                for k in characters[character_name]["Stats"].keys():
-                    print(f"{k}: {characters[character_name]["Stats"][k]}")
-                stat = input("What stat would you like to increase? Enter number:\n1. Strength\n2. Dexterity\n3. Constitution\n4. Wisdom\n5. Intellgience\n6. Charisma\nEnter here:").strip()
-                match stat:
-                    case "1":
-                        if characters[character_name]["Stats"]["Strength"] == 20:
-                            
-                            print("Strength is already 20, it cannot go any higher.")
-                            continue
-                        else:
-                            characters[character_name]["Stats"]["Strength"] += 1
-                            break
-                    case "2":
-                        if characters[character_name]["Stats"]["Dexterity"] == 20:
-                            
-                            print("Strength is already 20, it cannot go any higher.")
-                            continue
-                        else:
-                            characters[character_name]["Stats"]["Dexterity"] += 1
-                            break
-                    case "3":
-                        if characters[character_name]["Stats"]["Constitution"] == 20:
-                            
-                            print("Strength is already 20, it cannot go any higher.")
-                            continue
-                        else:
-                            characters[character_name]["Stats"]["Constitution"] += 1
-                            break
-                    case "4":
-                        if characters[character_name]["Stats"]["Wisdom"] == 20:
-                            
-                            print("Strength is already 20, it cannot go any higher.")
-                            continue
-                        else:
-                            characters[character_name]["Stats"]["Wisdom"] += 1
-                            break
-                    case "5":
-                        if characters[character_name]["Stats"]["Intelligence"] == 20:
-                            
-                            print("Strength is already 20, it cannot go any higher.")
-                            continue
-                        else:
-                            characters[character_name]["Stats"]["Intelligence"] += 1
-                            break
-                    case "6":
-                        if characters[character_name]["Stats"]["Charisma"] == 20:
-                            
-                            print("Strength is already 20, it cannot go any higher.")
-                            continue
-                        else:
-                            characters[character_name]["Stats"]["Charisma"] += 1
-                            break
-                    case _:
-                        
-                        print("Invalid answer")
-                        continue
-                return
-
+    characters[character_name]["level"]=utill_functions.get_valid_type(int,"what is your new level: ",valid=(1,20))
+    return
 def manage_inspect(characters,character_name):
     while True:
         print(f"Name: {character_name}\nRace: {str(characters[character_name]["Race"][0])}\nClass: {str(characters[character_name]["Class"][0])}\nLevel: {characters[character_name]["Level"]}")
